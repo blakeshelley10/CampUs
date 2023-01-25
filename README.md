@@ -1,8 +1,6 @@
-# Software-Engineering-Project
+# CampUs
 
-Project name: 
-              -CampUs
-              -GatorGram
+Project name: CampUs
               
 Project description: A social media website for UF current events (university sponsored events, club events/meetings, etc...)
 
