@@ -1,4 +1,4 @@
-# CampUs
+# CampUs - Intro to Software Engineering Project
 
 Project name: CampUs
               
