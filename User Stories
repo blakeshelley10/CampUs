@@ -11,3 +11,8 @@ Which ones didn't and why?:
     
   - As a site visitor, I want to be able to search through club/event announcements,
     so that I can find the events I'm looking for / care about.
+    
+  - As a site visitor, I want to be able to include images about my event, to better communicate the event
+    to possible attendees.
+    
+  - As a site visitor, I want to be able to login, so I can save my preferences.
