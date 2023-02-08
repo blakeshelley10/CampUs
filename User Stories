@@ -1,7 +1,4 @@
 User stories:
-What issues your team planned to address:
-Which ones were successfully completed:
-Which ones didn't and why?:
 
   - As a site visitor, I want to be able to make an annoucement
     about my club/event, to involve more people.
@@ -16,3 +13,18 @@ Which ones didn't and why?:
     to possible attendees.
     
   - As a site visitor, I want to be able to login, so I can save my preferences.
+
+What issues your team planned to address:
+  
+  - The main issues out team decided to tackle this sprint include being able to login/register in the front end, and having that information stored in the back end. 
+  
+Which ones were successfully completed:
+  
+  - The issue of logging in and registering were sucessfully complete and implemented for both front and backend. That being said our group ran into quite a few issues getting the
+    two linked, so the functionality works for both seaparately, but we just have not figured out how to make requests between the two.
+  
+  
+Which ones didn't and why?:
+  
+    - We could also list the above one here because we haven't technically got it to work exactly as it should in final implementation. The problem relates to 
+      us trying to get the front and back end linked.
