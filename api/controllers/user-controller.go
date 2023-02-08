@@ -83,7 +83,7 @@ func DeleteUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 func findUser(db *gorm.DB, username string, w http.ResponseWriter, r *http.Request) *models.User {
 	user := models.User{}
-	if err := db.First(&user, models.User{Username: username}).Error; err != nil {
+	if err := db.Find(&user, models.User{Username: username}).Error; err != nil {
 		respondError(w, http.StatusNotFound, err.Error())
 		return nil
 	}
