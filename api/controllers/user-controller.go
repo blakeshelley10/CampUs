@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"crypto/sha256"
 	"encoding/json"
 	"net/http"
 
@@ -35,6 +36,10 @@ func CreateUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer r.Body.Close()
+
+	h := sha256.New()
+	h.Write([]byte(user.Passwordhash))
+	user.Passwordhash = string(h.Sum(nil))
 
 	if err := db.Save(&user).Error; err != nil {
 		respondError(w, http.StatusInternalServerError, err.Error())
