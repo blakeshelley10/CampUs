@@ -1,3 +1,6 @@
+// Defines an HTTP server application that handles user data by creating,
+// reading, updating, and deleting user information in a SQLite database.
+
 package app
 
 import (

@@ -1,3 +1,6 @@
+// Defines several functions for managing user data in a web API
+// using the Go programming language and the Gorilla web toolkit.
+
 package controllers
 
 import (
@@ -17,8 +20,13 @@ func GetAllUsers(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 }
 
 func GetUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+	// mux.Vars(r) is used to extract the variables from the incoming
+	// request's URL. The variables are returned as a map where the keys
+	// are the variable names defined in the URL path and the values are
+	// the actual values specified in the request.
 	vars := mux.Vars(r)
 
+	// vars["username"] is used to extract the value of this variable.
 	username := vars["username"]
 	user := findUser(db, username, w, r)
 	if user == nil {
@@ -28,19 +36,25 @@ func GetUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 }
 
 func CreateUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+	// Creates a new empty models.User struct
 	user := models.User{}
 
+	// Decodes the JSON data from the request body into the user struct
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&user); err != nil {
 		respondError(w, http.StatusBadRequest, err.Error())
 		return
 	}
+
+	// Makes sure that the request body is closed before the function exits.
 	defer r.Body.Close()
 
+	// Hashes the user's password
 	h := sha256.New()
 	h.Write([]byte(user.Passwordhash))
 	user.Passwordhash = string(h.Sum(nil))
 
+	// Saves the user to the database
 	if err := db.Save(&user).Error; err != nil {
 		respondError(w, http.StatusInternalServerError, err.Error())
 		return
