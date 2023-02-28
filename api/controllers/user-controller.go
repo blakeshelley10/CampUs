@@ -13,6 +13,73 @@ import (
 	"gorm.io/gorm"
 )
 
+func LogIn(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+
+	// Creates a new empty models.User struct
+	user := models.User{}
+
+	// Decodes the JSON data from the request body into the user struct
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(&user); err != nil {
+		respondError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	// Makes sure that the request body is closed before the function exits.
+	defer r.Body.Close()
+
+	// Hashes the user's password
+	h := sha256.New()
+	h.Write([]byte(user.Passwordhash))
+	user.Passwordhash = string(h.Sum(nil))
+
+	var checkUser models.User
+	db.Where("username = ?", user.Username).First(&checkUser)
+
+	if user.Username != checkUser.Username || user.Passwordhash != checkUser.Passwordhash {
+		respondError(w, http.StatusInternalServerError, "Username or password is incorrect. Please try again.")
+		return
+	}
+
+	respondJSON(w, http.StatusCreated, "Login Successful!")
+}
+func RegisterUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+
+	// Creates a new empty models.User struct
+	user := models.User{}
+
+	// Decodes the JSON data from the request body into the user struct
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(&user); err != nil {
+		respondError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	// Makes sure that the request body is closed before the function exits.
+	defer r.Body.Close()
+
+	// Hashes the user's password
+	h := sha256.New()
+	h.Write([]byte(user.Passwordhash))
+	user.Passwordhash = string(h.Sum(nil))
+
+	username := user.Username
+	var checkUsername models.User
+	db.Where("username = ?", username).First(&checkUsername)
+
+	if username == checkUsername.Username {
+		respondError(w, http.StatusInternalServerError, "Username already taken. Try another one.")
+		return
+	}
+
+	// Saves the user to the database
+	if err := db.Save(&user).Error; err != nil {
+		respondError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	respondJSON(w, http.StatusCreated, user)
+}
+
 func GetAllUsers(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	users := []models.User{}
 	db.Find(&users)

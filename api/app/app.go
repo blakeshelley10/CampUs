@@ -16,8 +16,9 @@ import (
 
 // Server container
 type App struct {
-	Router *mux.Router
-	DB     *gorm.DB
+	Router  *mux.Router
+	DB      *gorm.DB
+	EventDB *gorm.DB
 }
 
 // Opens database and router
@@ -28,7 +29,13 @@ func (a *App) Initialize() {
 		log.Panic("Could not connect to database")
 	}
 
+	eventdb, err := gorm.Open(sqlite.Open("campusevents.db"), &gorm.Config{})
+	if err != nil {
+		log.Panic("Could not connect to database")
+	}
+
 	a.DB = models.DBMigrate(db)
+	a.EventDB = models.EventDBMigrate(eventdb)
 	a.Router = mux.NewRouter()
 	a.setRouters()
 }
@@ -40,6 +47,9 @@ func (a *App) setRouters() {
 	a.Get("/users/{username}", a.GetUser)
 	a.Put("/users/{username}", a.UpdateUser)
 	a.Delete("/users/{username}", a.DeleteUser)
+
+	a.Post("/register", a.RegisterUser)
+	a.Post("/login", a.LogIn)
 }
 
 // Router wrapper functions
@@ -78,6 +88,14 @@ func (a *App) UpdateUser(w http.ResponseWriter, r *http.Request) {
 
 func (a *App) DeleteUser(w http.ResponseWriter, r *http.Request) {
 	controllers.DeleteUser(a.DB, w, r)
+}
+
+func (a *App) RegisterUser(w http.ResponseWriter, r *http.Request) {
+	controllers.RegisterUser(a.DB, w, r)
+}
+
+func (a *App) LogIn(w http.ResponseWriter, r *http.Request) {
+	controllers.LogIn(a.DB, w, r)
 }
 
 // Run http server
