@@ -1,4 +1,4 @@
-// Defines a database model for a user and a function to create and
+// Defines a database model for an event and a function to create and
 // migrate the table to the database using the GORM library
 
 package models

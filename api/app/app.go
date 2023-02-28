@@ -17,14 +17,14 @@ import (
 // Server container
 type App struct {
 	Router  *mux.Router
-	DB      *gorm.DB
+	UserDB  *gorm.DB
 	EventDB *gorm.DB
 }
 
 // Opens database and router
 func (a *App) Initialize() {
 
-	db, err := gorm.Open(sqlite.Open("campususers.db"), &gorm.Config{})
+	userdb, err := gorm.Open(sqlite.Open("campususers.db"), &gorm.Config{})
 	if err != nil {
 		log.Panic("Could not connect to database")
 	}
@@ -34,7 +34,7 @@ func (a *App) Initialize() {
 		log.Panic("Could not connect to database")
 	}
 
-	a.DB = models.DBMigrate(db)
+	a.UserDB = models.UserDBMigrate(userdb)
 	a.EventDB = models.EventDBMigrate(eventdb)
 	a.Router = mux.NewRouter()
 	a.setRouters()
@@ -42,14 +42,16 @@ func (a *App) Initialize() {
 
 // Set all routers
 func (a *App) setRouters() {
-	a.Get("/users", a.GetAllUsers)
-	a.Post("/users", a.CreateUser)
-	a.Get("/users/{username}", a.GetUser)
-	a.Put("/users/{username}", a.UpdateUser)
-	a.Delete("/users/{username}", a.DeleteUser)
+	//User CRUD routes
+	a.Get("/api/users", a.GetAllUsers)
+	a.Post("/api/users", a.CreateUser)
+	a.Get("/api/users/{username}", a.GetUser)
+	a.Put("/api/users/{username}", a.UpdateUser)
+	a.Delete("/api/users/{username}", a.DeleteUser)
 
-	a.Post("/register", a.RegisterUser)
-	a.Post("/login", a.LogIn)
+	//User authentication routes
+	a.Post("/api/users/register", a.RegisterUser)
+	a.Post("/api/users/login", a.LogIn)
 }
 
 // Router wrapper functions
@@ -71,31 +73,31 @@ func (a *App) Delete(path string, f func(w http.ResponseWriter, r *http.Request)
 
 // Handlers to manage user data
 func (a *App) GetAllUsers(w http.ResponseWriter, r *http.Request) {
-	controllers.GetAllUsers(a.DB, w, r)
+	controllers.GetAllUsers(a.UserDB, w, r)
 }
 
 func (a *App) CreateUser(w http.ResponseWriter, r *http.Request) {
-	controllers.CreateUser(a.DB, w, r)
+	controllers.CreateUser(a.UserDB, w, r)
 }
 
 func (a *App) GetUser(w http.ResponseWriter, r *http.Request) {
-	controllers.GetUser(a.DB, w, r)
+	controllers.GetUser(a.UserDB, w, r)
 }
 
 func (a *App) UpdateUser(w http.ResponseWriter, r *http.Request) {
-	controllers.UpdateUser(a.DB, w, r)
+	controllers.UpdateUser(a.UserDB, w, r)
 }
 
 func (a *App) DeleteUser(w http.ResponseWriter, r *http.Request) {
-	controllers.DeleteUser(a.DB, w, r)
+	controllers.DeleteUser(a.UserDB, w, r)
 }
 
 func (a *App) RegisterUser(w http.ResponseWriter, r *http.Request) {
-	controllers.RegisterUser(a.DB, w, r)
+	controllers.RegisterUser(a.UserDB, w, r)
 }
 
 func (a *App) LogIn(w http.ResponseWriter, r *http.Request) {
-	controllers.LogIn(a.DB, w, r)
+	controllers.LogIn(a.UserDB, w, r)
 }
 
 // Run http server

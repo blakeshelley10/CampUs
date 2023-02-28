@@ -27,7 +27,7 @@ type User struct {
 // the AutoMigrate method to automatically create the necessary table(s)
 // and migrate the schema to match the User struct. This ensures that the
 // database schema is up-to-date with the latest changes in the model.
-func DBMigrate(db *gorm.DB) *gorm.DB {
-	db.AutoMigrate(&User{})
-	return db
+func UserDBMigrate(Userdb *gorm.DB) *gorm.DB {
+	Userdb.AutoMigrate(&User{})
+	return Userdb
 }
