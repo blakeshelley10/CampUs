@@ -8,6 +8,13 @@ import { Component } from '@angular/core';
 export class SignupComponent {
 
   type: string = "password";
+  public First_Name = '';
+  public Last_Name = '';
+  public Email = '';
+  public Password = '';
+  public Username = '';
+
+
   isText: boolean = false;
   eyeIcon: string= "fa fa-eye";
 
@@ -18,5 +25,9 @@ export class SignupComponent {
     this.isText ? this.type = "text" : this.type = "password";
   }
 
-
+  async addUser(){
+    
+  }
 }
+
+
