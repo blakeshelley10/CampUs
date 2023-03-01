@@ -41,7 +41,7 @@ func LogIn(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	respondJSON(w, http.StatusCreated, "Login Successful!")
+	respondJSON(w, http.StatusCreated, user)
 }
 func RegisterUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
