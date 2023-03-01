@@ -1,4 +1,8 @@
 ## Frontend Work Completed:
+- Defined proxy.config.json to reroute all requests made from the frontend to url "/api/*" to the backend
+- Signup page now create new user information and sends a POST request to the backend to store new users in the database
+- Signup page requires input for all fields or it will not send to the backend
+- Signup page leads to new registration screen once registration is successful
 
 ## Backend Work Completed:
 - Set up a database to store User and Event structs.
