@@ -10,6 +10,7 @@
 ## Frontend Cypress Test:
 
 ## Frontend Unit Test:
+- Created a unit test using cypress in order to test the signup page. The unit test goes to the 'signup' page where a user can register. The test fills in the required text fields with some rudimentary user data. The test then makes a click event occur on the registration button. This sends a push request to the backend to store the newly registed users data. After this, the page reroutes to the confirmed signup page. 
 
 ## Backend Unit Test:
 ### User CRUD Tests
