@@ -11,41 +11,41 @@
                             <div class="form-group pt-3">
                                 <div class="input-field">
                                     <span class="fa fa-user p-2"></span>
-                                    <input type="text" placeholder="First Name">
-                                
+                                    <input [(ngModel)]="Firstname" type="text" placeholder="First Name" [ngModelOptions]="{standalone: true}">
                                 </div>
                             </div>
                             <div class="form-group pt-3">
                                 <div class="input-field">
                                     <span class="fa fa-user p-2"></span>
-                                    <input type="text" placeholder="Last Name">
+                                    <input [(ngModel)]="Lastname" type="text" placeholder="Last Name" [ngModelOptions]="{standalone: true}">
                                 </div>
                             </div>
                             <div class="form-group pt-3">
                                 <div class="input-field">
                                     <span class="fa fa-user p-2"></span>
-                                    <input type="text" placeholder="Email">
+                                    <input [(ngModel)]="Email" type="text" placeholder="Email" [ngModelOptions]="{standalone: true}">
                                 </div>
                             </div>
                             <div class="form-group pt-3">
                                 <div class="input-field">
                                     <span class="fa fa-user p-2"></span>
-                                    <input type="text" placeholder="Username">
+                                    <input [(ngModel)]="Username" type="text" placeholder="Username" [ngModelOptions]="{standalone: true}">
                                 </div>
                             </div>
                             <div class="form-group pt-3">
                                 <div class="input-field">
                                     <span class="fa fa-lock p-2"></span>
-                                    <input [type]="type" placeholder="Password">
-                                    <span (click)="hideShowPass()" class="fa {{eyeIcon}}"></span>
+                                    <input [(ngModel)]="Passwordhash" type="text" placeholder="Password" [ngModelOptions]="{standalone: true}">
+                                    <!-- <span (click)="hideShowPass()" class="fa {{eyeIcon}}"></span> -->
                                 </div>
                             </div>
                             
                             <!-- <button type= "submit" class="btn btn-primary btn-block mt-4 w-100">Login</button> -->
-                            <button type="button" routerLink="/login" class="btn btn-primary btn-block mt-4 w-100">Register</button>    
+                            <!-- <button type="button" routerLink="/login" click class="btn btn-primary btn-block mt-4 w-100">Register</button>     -->
+                            <button (click)="addUser()" class="btn btn-primary btn-block mt-4 w-100">Register</button>
                         </form>
+                        
                     </div>
-
                 </div>
             </div>
         </div>
