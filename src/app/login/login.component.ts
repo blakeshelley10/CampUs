@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { firstValueFrom, lastValueFrom, map } from 'rxjs';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +11,9 @@ import { Component } from '@angular/core';
 export class LoginComponent {
 
   type: string = "password";
+  public Firstname = ''
+  public Lastname = ''
+  
   isText: boolean = false;
   eyeIcon: string= "fa fa-eye";
 

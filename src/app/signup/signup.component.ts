@@ -17,7 +17,6 @@ export class SignupComponent implements OnInit{
   public Username = ''
   public Passwordhash = ''
 
-
   isText: boolean = false;
   eyeIcon: string= "fa fa-eye";
   hideShowPass() {
