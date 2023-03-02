@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,11 +12,9 @@ export class LoginComponent {
   eyeIcon: string= "fa fa-eye";
 
   hideShowPass(){
-
     this.isText = !this.isText;
     this.isText ? this.eyeIcon = "fa-eye-slash" : this.eyeIcon = "fa-eye";
     this.isText ? this.type = "text" : this.type = "password";
   }
-
 
 }

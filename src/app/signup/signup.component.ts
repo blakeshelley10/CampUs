@@ -10,7 +10,7 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class SignupComponent implements OnInit{
 
-  // type: string = "password";
+  type: string = "password";
   public Firstname = ''
   public Lastname = ''
   public Email = ''
@@ -18,15 +18,13 @@ export class SignupComponent implements OnInit{
   public Passwordhash = ''
 
 
-  // isText: boolean = false;
-  // eyeIcon: string= "fa fa-eye";
-
-  // hideShowPass(){
-
-  //   this.isText = !this.isText;
-  //   this.isText ? this.eyeIcon = "fa-eye-slash" : this.eyeIcon = "fa-eye";
-  //   this.isText ? this.type = "text" : this.type = "password";
-  // }
+  isText: boolean = false;
+  eyeIcon: string= "fa fa-eye";
+  hideShowPass() {
+    this.isText = !this.isText;
+    this.isText ? this.eyeIcon = "fa-eye-slash" : this.eyeIcon = "fa-eye";
+    this.isText ? this.type = "text" : this.type = "password";
+  }
 
   constructor(
    private httpClient : HttpClient,
@@ -36,11 +34,9 @@ export class SignupComponent implements OnInit{
   ngOnInit(){
     this.fetchUsers;
   }
-
   onUsersFetch(){
     this.fetchUsers;
   }
-
 
   // adds a user with the given registered info
   addUser(){
@@ -60,27 +56,24 @@ export class SignupComponent implements OnInit{
     }
   }
 
-deleteUser()
-{
-  this.httpClient.delete('/api/users/jim').subscribe((res) => {console.log})
+  deleteUser()
+  {
+    this.httpClient.delete('/api/users/jim').subscribe((res) => {console.log})
+  }
+    
+  private fetchUsers(){
+    this.httpClient.get('/api/users',{observe: 'body', responseType: 'json'})
+    // .pipe(map((res)=> {
+    //   const users = [];
+    //   for(const key in res)
+    //   {
+    //     if(res.hasOwnProperty(key)){
+    //       users.push({...res[key], id: key})
+    //     }
+    //   }
+    //   return users;
+    // }))
+    .subscribe((res) => {console.log})
+  }
+
 }
-
-  
-private fetchUsers(){
-  this.httpClient.get('/api/users',{observe: 'body', responseType: 'json'})
-  // .pipe(map((res)=> {
-  //   const users = [];
-  //   for(const key in res)
-  //   {
-  //     if(res.hasOwnProperty(key)){
-  //       users.push({...res[key], id: key})
-  //     }
-  //   }
-  //   return users;
-  // }))
-  .subscribe((res) => {console.log})
-}
-
-}
-
-

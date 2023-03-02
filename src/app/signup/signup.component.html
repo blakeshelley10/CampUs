@@ -11,34 +11,42 @@
                             <div class="form-group pt-3">
                                 <div class="input-field">
                                     <span class="fa fa-user p-2"></span>
-                                    <input [(ngModel)]="Firstname" type="text" placeholder="First Name" [ngModelOptions]="{standalone: true}">
+                                    <input [(ngModel)]="Firstname" type="text" placeholder="First Name" [ngModelOptions]="{standalone: true}" ngModel name="firstname" required firstname #firstname="ngModel">
                                 </div>
+                            </div>
+                            <small *ngIf="firstname.touched && !firstname.valid" class="text-danger">*First name is required</small>
+                            <div class="form-group pt-3">
+                                <div class="input-field">
+                                    <span class="fa fa-user p-2"></span>
+                                    <input [(ngModel)]="Lastname" type="text" placeholder="Last Name" [ngModelOptions]="{standalone: true}" ngModel name="lastname" required lastname #lastname="ngModel">
+                                </div>
+                            </div>
+                            <small *ngIf="lastname.touched && !lastname.valid" class="text-danger">*Last name is required</small>
+                            <div class="form-group pt-3">
+                                <div class="input-field">
+                                    <span class="fa fa-user p-2"></span>
+                                    <input [(ngModel)]="Email" type="text" placeholder="Email" [ngModelOptions]="{standalone: true}" ngModel name="email" required email #email="ngModel">
+                                </div>
+                            </div>
+                            <div *ngIf="email.touched && !email.valid" class="text-danger">
+                                <small *ngIf="email.errors.required">*Email is required</small>
+                                <small *ngIf="email.errors.email">*Invalid email</small>
                             </div>
                             <div class="form-group pt-3">
                                 <div class="input-field">
                                     <span class="fa fa-user p-2"></span>
-                                    <input [(ngModel)]="Lastname" type="text" placeholder="Last Name" [ngModelOptions]="{standalone: true}">
+                                    <input [(ngModel)]="Username" type="text" placeholder="Username" [ngModelOptions]="{standalone: true}" ngModel name="username" required username #username="ngModel">
                                 </div>
                             </div>
-                            <div class="form-group pt-3">
-                                <div class="input-field">
-                                    <span class="fa fa-user p-2"></span>
-                                    <input [(ngModel)]="Email" type="text" placeholder="Email" [ngModelOptions]="{standalone: true}">
-                                </div>
-                            </div>
-                            <div class="form-group pt-3">
-                                <div class="input-field">
-                                    <span class="fa fa-user p-2"></span>
-                                    <input [(ngModel)]="Username" type="text" placeholder="Username" [ngModelOptions]="{standalone: true}">
-                                </div>
-                            </div>
+                            <small *ngIf="username.touched && !username.valid" class="text-danger">*Username is required</small>
                             <div class="form-group pt-3">
                                 <div class="input-field">
                                     <span class="fa fa-lock p-2"></span>
-                                    <input [(ngModel)]="Passwordhash" type="text" placeholder="Password" [ngModelOptions]="{standalone: true}">
-                                    <!-- <span (click)="hideShowPass()" class="fa {{eyeIcon}}"></span> -->
+                                    <input [(ngModel)]="Passwordhash" [type]="type" placeholder="Password" [ngModelOptions]="{standalone: true}" ngModel name="password" required password #password="ngModel">
+                                    <span (click)="hideShowPass()" class="fa {{eyeIcon}}"></span>
                                 </div>
                             </div>
+                            <small *ngIf="password.touched && !password.valid" class="text-danger">*Password is required</small>
                             
                             <!-- <button type= "submit" class="btn btn-primary btn-block mt-4 w-100">Login</button> -->
                             <!-- <button type="button" routerLink="/login" click class="btn btn-primary btn-block mt-4 w-100">Register</button>     -->
