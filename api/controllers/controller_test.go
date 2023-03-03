@@ -23,7 +23,7 @@ func TestRegisterUser(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	testDB := models.UserDBMigrate(testdb)
+	testDB := models.DBMigrate(testdb)
 
 	//Create test user
 	testUser := models.User{Username: "crandall24", Passwordhash: "password", Firstname: "matt", Lastname: "randall", Email: "mr@gmail.com"}
@@ -62,7 +62,7 @@ func TestLogIn(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	testDB := models.UserDBMigrate(testdb)
+	testDB := models.DBMigrate(testdb)
 
 	//Create test user
 	testUser := models.User{Username: "nrandall24", Passwordhash: "password", Firstname: "matt", Lastname: "randall", Email: "mr@gmail.com"}
@@ -101,7 +101,7 @@ func TestCreateUser(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	testDB := models.UserDBMigrate(testdb)
+	testDB := models.DBMigrate(testdb)
 
 	//Create test user
 	testUser := models.User{Username: "mrandall24", Passwordhash: "password", Firstname: "matt", Lastname: "randall", Email: "mr@gmail.com"}
@@ -140,7 +140,7 @@ func TestGetUser(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	testDB := models.UserDBMigrate(testdb)
+	testDB := models.DBMigrate(testdb)
 
 	//Create test user
 	testUser := models.User{Username: "mrandall24", Passwordhash: "password", Firstname: "matt", Lastname: "randall", Email: "mr@gmail.com"}
@@ -169,7 +169,7 @@ func TestUpdateUser(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	testDB := models.UserDBMigrate(testdb)
+	testDB := models.DBMigrate(testdb)
 
 	//Create test user
 	testUser := models.User{Username: "mrandall24", Passwordhash: "password", Firstname: "matt", Lastname: "randall", Email: "mr@gmail.com"}
@@ -198,7 +198,7 @@ func TestDeleteUser(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	testDB := models.UserDBMigrate(testdb)
+	testDB := models.DBMigrate(testdb)
 
 	//Create test user
 	testUser := models.User{Username: "mrandall24", Passwordhash: "password", Firstname: "matt", Lastname: "randall", Email: "mr@gmail.com"}

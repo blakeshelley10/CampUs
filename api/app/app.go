@@ -16,9 +16,8 @@ import (
 
 // Server container
 type App struct {
-	Router  *mux.Router
-	UserDB  *gorm.DB
-	EventDB *gorm.DB
+	Router *mux.Router
+	DB     *gorm.DB
 }
 
 // Opens database and router
@@ -29,13 +28,7 @@ func (a *App) Initialize() {
 		log.Panic("Could not connect to database")
 	}
 
-	eventdb, err := gorm.Open(sqlite.Open("campusevents.db"), &gorm.Config{})
-	if err != nil {
-		log.Panic("Could not connect to database")
-	}
-
-	a.UserDB = models.UserDBMigrate(userdb)
-	a.EventDB = models.EventDBMigrate(eventdb)
+	a.DB = models.DBMigrate(userdb)
 	a.Router = mux.NewRouter()
 	a.setRouters()
 }
@@ -52,6 +45,11 @@ func (a *App) setRouters() {
 	//User authentication routes
 	a.Post("/api/users/register", a.RegisterUser)
 	a.Post("/api/users/login", a.LogIn)
+
+	//Event routes
+	a.Post("/api/events", a.CreateEvent)
+	a.Get("/api/events", a.GetAllEvents)
+	a.Get("/api/events/{name}", a.GetEvent)
 }
 
 // Router wrapper functions
@@ -73,31 +71,44 @@ func (a *App) Delete(path string, f func(w http.ResponseWriter, r *http.Request)
 
 // Handlers to manage user data
 func (a *App) GetAllUsers(w http.ResponseWriter, r *http.Request) {
-	controllers.GetAllUsers(a.UserDB, w, r)
+	controllers.GetAllUsers(a.DB, w, r)
 }
 
 func (a *App) CreateUser(w http.ResponseWriter, r *http.Request) {
-	controllers.CreateUser(a.UserDB, w, r)
+	controllers.CreateUser(a.DB, w, r)
 }
 
 func (a *App) GetUser(w http.ResponseWriter, r *http.Request) {
-	controllers.GetUser(a.UserDB, w, r)
+	controllers.GetUser(a.DB, w, r)
 }
 
 func (a *App) UpdateUser(w http.ResponseWriter, r *http.Request) {
-	controllers.UpdateUser(a.UserDB, w, r)
+	controllers.UpdateUser(a.DB, w, r)
 }
 
 func (a *App) DeleteUser(w http.ResponseWriter, r *http.Request) {
-	controllers.DeleteUser(a.UserDB, w, r)
+	controllers.DeleteUser(a.DB, w, r)
 }
 
 func (a *App) RegisterUser(w http.ResponseWriter, r *http.Request) {
-	controllers.RegisterUser(a.UserDB, w, r)
+	controllers.RegisterUser(a.DB, w, r)
 }
 
 func (a *App) LogIn(w http.ResponseWriter, r *http.Request) {
-	controllers.LogIn(a.UserDB, w, r)
+	controllers.LogIn(a.DB, w, r)
+}
+
+// Handlers to manage event data
+func (a *App) CreateEvent(w http.ResponseWriter, r *http.Request) {
+	controllers.CreateEvent(a.DB, w, r)
+}
+
+func (a *App) GetEvent(w http.ResponseWriter, r *http.Request) {
+	controllers.GetEvent(a.DB, w, r)
+}
+
+func (a *App) GetAllEvents(w http.ResponseWriter, r *http.Request) {
+	controllers.GetAllEvents(a.DB, w, r)
 }
 
 // Run http server
