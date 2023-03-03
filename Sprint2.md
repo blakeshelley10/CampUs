@@ -37,3 +37,5 @@
 - Integrated a LogIn function which receives a POST request. This function allows users to login to their account that they previously signed up with. The function is similar to the function CreateUser, except after hashing the password, the function checks whether this username already exists in the database through the "Where" function. When the user logs in, if their username or password is incorrect, or if it does not even exist in the database, the website will tell the user that one of the fields (username or passoword) is incorrect and prompt the user to try logging in again.
 
 ## Video Link: [Sprint 2 - CampUs](https://youtu.be/17yggggkEFY)
+
+## Github Link: [CampUs Github](https://github.com/blakeshelley10/CampUs)
