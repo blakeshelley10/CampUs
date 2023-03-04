@@ -155,7 +155,7 @@ func UpdateUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 func DeleteUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
-	username := vars["name"]
+	username := vars["username"]
 	user := findUser(db, username, w, r)
 	if user == nil {
 		return
