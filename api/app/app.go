@@ -50,6 +50,8 @@ func (a *App) setRouters() {
 	a.Post("/api/events", a.CreateEvent)
 	a.Get("/api/events", a.GetAllEvents)
 	a.Get("/api/events/{name}", a.GetEvent)
+	a.Post("/api/events/{name}", a.UpdateEvent)
+	a.Post("/api/events/{name}", a.DeleteEvent)
 }
 
 // Router wrapper functions
@@ -109,6 +111,14 @@ func (a *App) GetEvent(w http.ResponseWriter, r *http.Request) {
 
 func (a *App) GetAllEvents(w http.ResponseWriter, r *http.Request) {
 	controllers.GetAllEvents(a.DB, w, r)
+}
+
+func (a *App) UpdateEvent(w http.ResponseWriter, r *http.Request) {
+	controllers.UpdateEvent(a.DB, w, r)
+}
+
+func (a *App) DeleteEvent(w http.ResponseWriter, r *http.Request) {
+	controllers.DeleteEvent(a.DB, w, r)
 }
 
 // Run http server

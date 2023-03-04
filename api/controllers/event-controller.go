@@ -52,13 +52,51 @@ func GetEvent(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	// the actual values specified in the request.
 	vars := mux.Vars(r)
 
-	// vars["username"] is used to extract the value of this variable.
+	// vars["name"] is used to extract the value of this variable.
 	name := vars["name"]
 	event := findEvent(db, name, w, r)
 	if event == nil {
 		return
 	}
 	respondJSON(w, http.StatusOK, event)
+}
+
+func UpdateEvent(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+
+	name := vars["name"]
+	event := findEvent(db, name, w, r)
+	if event == nil {
+		return
+	}
+
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(&event); err != nil {
+		respondError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+	defer r.Body.Close()
+
+	if err := db.Save(&event).Error; err != nil {
+		respondError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	respondJSON(w, http.StatusOK, event)
+}
+
+func DeleteEvent(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+
+	name := vars["name"]
+	event := findEvent(db, name, w, r)
+	if event == nil {
+		return
+	}
+	if err := db.Delete(&event).Error; err != nil {
+		respondError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	respondJSON(w, http.StatusNoContent, nil)
 }
 
 func findEvent(db *gorm.DB, name string, w http.ResponseWriter, r *http.Request) *models.Event {
