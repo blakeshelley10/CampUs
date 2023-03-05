@@ -23,12 +23,12 @@ type App struct {
 // Opens database and router
 func (a *App) Initialize() {
 
-	userdb, err := gorm.Open(sqlite.Open("campusDB.db"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("campusDB.db"), &gorm.Config{})
 	if err != nil {
 		log.Panic("Could not connect to database")
 	}
 
-	a.DB = models.DBMigrate(userdb)
+	a.DB = models.DBMigrate(db)
 	a.Router = mux.NewRouter()
 	a.setRouters()
 }
@@ -50,6 +50,9 @@ func (a *App) setRouters() {
 	a.Post("/api/events", a.CreateEvent)
 	a.Get("/api/events", a.GetAllEvents)
 	a.Get("/api/events/{name}", a.GetEvent)
+	a.Put("/api/events/{name}", a.UpdateEvent)
+	a.Delete("/api/events/{name}", a.DeleteEvent)
+	a.Post("/api/events/search", a.SearchEvent)
 }
 
 // Router wrapper functions
@@ -109,6 +112,18 @@ func (a *App) GetEvent(w http.ResponseWriter, r *http.Request) {
 
 func (a *App) GetAllEvents(w http.ResponseWriter, r *http.Request) {
 	controllers.GetAllEvents(a.DB, w, r)
+}
+
+func (a *App) UpdateEvent(w http.ResponseWriter, r *http.Request) {
+	controllers.UpdateEvent(a.DB, w, r)
+}
+
+func (a *App) DeleteEvent(w http.ResponseWriter, r *http.Request) {
+	controllers.DeleteEvent(a.DB, w, r)
+}
+
+func (a *App) SearchEvent(w http.ResponseWriter, r *http.Request) {
+	controllers.SearchEvent(a.DB, w, r)
 }
 
 // Run http server
