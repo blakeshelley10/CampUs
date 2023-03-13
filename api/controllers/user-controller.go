@@ -13,6 +13,18 @@ import (
 	"gorm.io/gorm"
 )
 
+func GetUserProfilePicture(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+
+	// vars["username"] is used to extract the value of this variable.
+	username := vars["username"]
+	user := findUser(db, username, w, r)
+	if user == nil {
+		return
+	}
+	respondJSON(w, http.StatusOK, user.ProfilePicturePath)
+}
+
 func LogIn(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 	// Creates a new empty models.User struct
