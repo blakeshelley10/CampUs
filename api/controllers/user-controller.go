@@ -13,6 +13,18 @@ import (
 	"gorm.io/gorm"
 )
 
+func GetUserProfilePicture(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+
+	// vars["username"] is used to extract the value of this variable.
+	username := vars["username"]
+	user := findUser(db, username, w, r)
+	if user == nil {
+		return
+	}
+	respondJSON(w, http.StatusOK, user.ProfilePicturePath)
+}
+
 func LogIn(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 	// Creates a new empty models.User struct
@@ -29,14 +41,22 @@ func LogIn(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
 	// Hashes the user's password
-	h := sha256.New()
-	h.Write([]byte(user.Passwordhash))
-	user.Passwordhash = string(h.Sum(nil))
+	// h, err := HashPassword(user.Passwordhash)
+	// if err != nil {
+	// 	respondError(w, http.StatusBadRequest, err.Error())
+	// 	return
+	// }
+
+	// user.Passwordhash = h
+
+	//h := sha256.New()
+	//h.Write([]byte(user.Passwordhash))
+	//user.Passwordhash = string(h.Sum(nil))
 
 	var checkUser models.User
 	db.Where("username = ?", user.Username).First(&checkUser)
 
-	if user.Username != checkUser.Username || user.Passwordhash != checkUser.Passwordhash {
+	if user.Username != checkUser.Username || !(CheckPasswordHash(user.Passwordhash, checkUser.Passwordhash)) {
 		respondError(w, http.StatusInternalServerError, "Username or password is incorrect. Please try again.")
 		return
 	}
@@ -58,10 +78,23 @@ func RegisterUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	// Makes sure that the request body is closed before the function exits.
 	defer r.Body.Close()
 
+	// Checks if password meets requirements for good entropy
+	if !Password(user.Passwordhash) {
+		respondError(w, http.StatusBadRequest, "Password does not meet the requirements. Please try again.")
+		return
+	}
+
 	// Hashes the user's password
-	h := sha256.New()
-	h.Write([]byte(user.Passwordhash))
-	user.Passwordhash = string(h.Sum(nil))
+	h, err := HashPassword(user.Passwordhash)
+	if err != nil {
+		respondError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	user.Passwordhash = h
+	// h := sha256.New()
+	// h.Write([]byte(user.Passwordhash))
+	// user.Passwordhash = string(h.Sum(nil))
 
 	username := user.Username
 	var checkUsername models.User
