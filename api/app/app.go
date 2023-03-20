@@ -46,6 +46,9 @@ func (a *App) setRouters() {
 	a.Post("/api/users/register", a.RegisterUser)
 	a.Post("/api/users/login", a.LogIn)
 
+	//User Profile Picture
+	a.Get("/api/users/profilepicture/{username}", a.GetUserProfilePicture)
+
 	//Event routes
 	a.Post("/api/events", a.CreateEvent)
 	a.Get("/api/events", a.GetAllEvents)
@@ -53,6 +56,10 @@ func (a *App) setRouters() {
 	a.Put("/api/events/{name}", a.UpdateEvent)
 	a.Delete("/api/events/{name}", a.DeleteEvent)
 	a.Post("/api/events/search", a.SearchEvent)
+
+	//File upload routes
+	a.Post("/upload", a.UploadFile)
+	a.Post("/api/upload/profilepicture/{username}", a.UploadUserPFP)
 }
 
 // Router wrapper functions
@@ -101,6 +108,10 @@ func (a *App) LogIn(w http.ResponseWriter, r *http.Request) {
 	controllers.LogIn(a.DB, w, r)
 }
 
+func (a *App) GetUserProfilePicture(w http.ResponseWriter, r *http.Request) {
+	controllers.GetUserProfilePicture(a.DB, w, r)
+}
+
 // Handlers to manage event data
 func (a *App) CreateEvent(w http.ResponseWriter, r *http.Request) {
 	controllers.CreateEvent(a.DB, w, r)
@@ -124,6 +135,15 @@ func (a *App) DeleteEvent(w http.ResponseWriter, r *http.Request) {
 
 func (a *App) SearchEvent(w http.ResponseWriter, r *http.Request) {
 	controllers.SearchEvent(a.DB, w, r)
+}
+
+// Handlers to manage image/file data
+func (a *App) UploadFile(w http.ResponseWriter, r *http.Request) {
+	controllers.UploadFile(w, r)
+}
+
+func (a *App) UploadUserPFP(w http.ResponseWriter, r *http.Request) {
+	controllers.UploadUserPFP(a.DB, w, r)
 }
 
 // Run http server
