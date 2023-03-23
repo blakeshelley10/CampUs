@@ -1,7 +1,8 @@
 /* Add a black background color to the top navigation */
 .topnav {
-    background-color: blue;
+    background-color: #2943a2;
     overflow: hidden;
+    border-bottom: 1px solid black;
   }
   
   /* Style the links inside the navigation bar */
@@ -20,8 +21,16 @@
     color: black;
   }
   
+  .home-page-landing{
+    width: 100%;
+    height: 100%;
+    background-image: url("src/assets/cen3031logo.png");
+    background-size: cover;
+    background-position: center;
+  }
+
   /* Add a color to the active/current link */
-  .topnav a.active {
-    background-color: blue;
-    color: white;
+  .topnav a.home {
+    background-color: #ffffff;
+    color: black;
   }
