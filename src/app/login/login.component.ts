@@ -28,14 +28,12 @@ export class LoginComponent {
     private _router: Router
   ) {}
 
-  private checkUser(){
+  private userLogin(){
     // confirm if valid user
-    
     if(this.Username != "" && this.Passwordhash != "") {
-      // request type?
-      //this.httpClient.post('/api/users', {
-      //  "Passwordhash": this.Passwordhash,
-      //  "Username": this.Username})
+      //this.httpClient.get('/api/users/login', {
+      //  "Username": this.Username,
+      //  "Passwordhash": this.Passwordhash})
       //  .subscribe((res) => {console.log(res)} )
     }
     else{

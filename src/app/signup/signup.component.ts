@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit{
   addUser(){
     if(this.Firstname != "" && this.Lastname != "" && this.Email != "" && this.Passwordhash != "" && this.Username != "")
     {
-      this.httpClient.post('/api/users', {
+      this.httpClient.post('/api/users/register', {
         "Firstname": this.Firstname,
         "Lastname": this.Lastname,
         "Email": this.Email,
