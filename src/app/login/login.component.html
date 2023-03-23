@@ -23,14 +23,10 @@
                                 </div>
                             </div>
                             <small *ngIf="password.touched && !password.valid" class="text-danger">*Password is required</small>
-                            <div class="form-inline fr mt-4">
-                                <a id="forgot" class="font-weight-bold">Forgot Password?</a>
-                            </div>
                             <button type="button" routerLink="/home" class="btn btn-primary btn-block mt-4 w-100">Login</button>    
                             <div class="text-center pt-4 text-muted">Don't have an account? <a id="forget" routerLink="/signup">Sign Up</a></div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
