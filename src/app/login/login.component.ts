@@ -11,8 +11,8 @@ import { Router, RouterLink } from '@angular/router';
 export class LoginComponent {
 
   type: string = "password";
-  public Firstname = ''
-  public Lastname = ''
+  public Username = ''
+  public Passwordhash = ''
   
   isText: boolean = false;
   eyeIcon: string= "fa fa-eye";
@@ -23,4 +23,23 @@ export class LoginComponent {
     this.isText ? this.type = "text" : this.type = "password";
   }
 
+  constructor(
+    private httpClient : HttpClient,
+    private _router: Router
+  ) {}
+
+  private checkUser(){
+    // confirm if valid user
+    
+    if(this.Username != "" && this.Passwordhash != "") {
+      // request type?
+      //this.httpClient.post('/api/users', {
+      //  "Passwordhash": this.Passwordhash,
+      //  "Username": this.Username})
+      //  .subscribe((res) => {console.log(res)} )
+    }
+    else{
+
+    }
+  }
 }
