@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { firstValueFrom, lastValueFrom, map } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
+import { Observable, of, from, throwError } from "rxjs";
+import { catchError } from "rxjs/operators";
 
 @Component({
   selector: 'app-signup',
@@ -9,6 +11,7 @@ import { Router, RouterLink } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit{
+  errormessage:any;
 
   type: string = "password";
   public Firstname = ''
@@ -41,13 +44,18 @@ export class SignupComponent implements OnInit{
   addUser(){
     if(this.Firstname != "" && this.Lastname != "" && this.Email != "" && this.Passwordhash != "" && this.Username != "")
     {
-      this.httpClient.post('/api/users', {
+      this.httpClient.post('/api/users/register', {
         "Firstname": this.Firstname,
         "Lastname": this.Lastname,
         "Email": this.Email,
         "Passwordhash": this.Passwordhash,
         "Username": this.Username})
-        .subscribe((res) => {console.log(res)} )
+        .pipe(
+          catchError(this.handleError)
+        )
+        .subscribe((res) => {console.log(res)},(error)=>{
+          this.errormessage = error;
+        })
         this._router.navigateByUrl('/confirm-reg')
     }
     else{
@@ -58,11 +66,13 @@ export class SignupComponent implements OnInit{
 
   deleteUser()
   {
-    this.httpClient.delete('/api/users/jim').subscribe((res) => {console.log})
+    this.httpClient.delete('/api/users/Testtest1').subscribe((res) => {console.log})
   }
     
   private fetchUsers(){
-    this.httpClient.get('/api/users',{observe: 'body', responseType: 'json'})
+
+
+    //this.httpClient.get('/api/users',{observe: 'body', responseType: 'json'})
     // .pipe(map((res)=> {
     //   const users = [];
     //   for(const key in res)
@@ -73,7 +83,19 @@ export class SignupComponent implements OnInit{
     //   }
     //   return users;
     // }))
-    .subscribe((res) => {console.log})
+    //.subscribe((res) => {console.log})
   }
 
+  // handle 400 error
+  private handleError(error: HttpErrorResponse) {
+    let errormessage = '';
+    if (error.status == 400) {
+      console.error(
+        `Backend returned code ${error.status}, body was: `, error.error);
+        errormessage = `something happened`;
+    } else {
+      console.log("user registered successfully");
+    }
+    return throwError(() => new Error(errormessage));
+  }
 }

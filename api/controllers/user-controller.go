@@ -71,7 +71,7 @@ func RegisterUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	// Decodes the JSON data from the request body into the user struct
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&user); err != nil {
-		respondError(w, http.StatusBadRequest, err.Error())
+		respondError(w, http.StatusBadRequest, "decoder error") //err.Error())
 		return
 	}
 

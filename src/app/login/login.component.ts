@@ -41,12 +41,10 @@ export class LoginComponent{
         "Passwordhash": this.Passwordhash})
         .pipe(
           catchError(this.handleError)
-        ) 
+        )
         .subscribe((res) => {console.log(res)},(error)=>{
           this.errormessage = error;
-        }
-        )
-
+        })
     }
     else{
 
