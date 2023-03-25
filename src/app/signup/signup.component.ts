@@ -20,6 +20,8 @@ export class SignupComponent implements OnInit{
   public Username = ''
   public Passwordhash = ''
 
+  missingField: boolean = false;
+
   isText: boolean = false;
   eyeIcon: string= "fa fa-eye";
   hideShowPass() {
@@ -44,29 +46,31 @@ export class SignupComponent implements OnInit{
   addUser(){
     if(this.Firstname != "" && this.Lastname != "" && this.Email != "" && this.Passwordhash != "" && this.Username != "")
     {
+      this.missingField = false;
       this.httpClient.post('/api/users/register', {
         "Firstname": this.Firstname,
         "Lastname": this.Lastname,
         "Email": this.Email,
         "Passwordhash": this.Passwordhash,
         "Username": this.Username})
-        .pipe(
-          catchError(this.handleError)
+        .pipe(map((res)=> {
+          console.log("user registered successfully");
+          this._router.navigateByUrl('/confirm-reg')
+        }),
+        catchError(this.handleError)
         )
         .subscribe((res) => {console.log(res)},(error)=>{
           this.errormessage = error;
         })
-        this._router.navigateByUrl('/confirm-reg')
     }
     else{
-      // username or email already in use
-
+      this.missingField = true;
     }
   }
 
   deleteUser()
   {
-    this.httpClient.delete('/api/users/Testtest1').subscribe((res) => {console.log})
+    this.httpClient.delete('/api/users/testtest1').subscribe((res) => {console.log})
   }
     
   private fetchUsers(){
@@ -89,12 +93,19 @@ export class SignupComponent implements OnInit{
   // handle 400 error
   private handleError(error: HttpErrorResponse) {
     let errormessage = '';
-    if (error.status == 400) {
+    if (error.status == 401) {
       console.error(
         `Backend returned code ${error.status}, body was: `, error.error);
-        errormessage = `something happened`;
+      errormessage = "Username already taken. Try another one.";
+    }
+    else if (error.status == 402) {
+      console.error(
+        `Backend returned code ${error.status}, body was: , error.error`);
+        errormessage = "Password does not meet the requirements. Please try again.";
     } else {
-      console.log("user registered successfully");
+      console.error(
+        `Backend returned code ${error.status}, body was: `, error.error);
+      errormessage = "Unexpected error. Please try again.";
     }
     return throwError(() => new Error(errormessage));
   }

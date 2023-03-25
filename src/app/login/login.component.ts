@@ -13,6 +13,7 @@ import { catchError } from "rxjs/operators";
 })
 export class LoginComponent{
   errormessage:any;
+  missingField: boolean = false;
 
   type: string = "password";
   public Username = ''
@@ -36,18 +37,22 @@ export class LoginComponent{
   userLogin(){
     // confirm if valid user
     if(this.Username != "" && this.Passwordhash != "") {
+      this.missingField = false;
       this.httpClient.post('/api/users/login', {
         "Username": this.Username,
         "Passwordhash": this.Passwordhash})
-        .pipe(
-          catchError(this.handleError)
+        .pipe(map((res)=> {
+          console.log("user logged in successfully");
+          this._router.navigateByUrl('/home')
+        }),
+        catchError(this.handleError)
         )
         .subscribe((res) => {console.log(res)},(error)=>{
           this.errormessage = error;
         })
     }
     else{
-
+      this.missingField = true;
     }
   }
 
@@ -58,7 +63,9 @@ export class LoginComponent{
         `Backend returned code ${error.status}, body was: `, error.error);
         errormessage = `Username or password is incorrect. Please try again.`;
     } else {
-      this._router.navigateByUrl('/home')
+      console.error(
+        `Backend returned code ${error.status}, body was: `, error.error);
+        errormessage = `Unexpected error. Please try again.`;
     }
     return throwError(() => new Error(errormessage));
   }

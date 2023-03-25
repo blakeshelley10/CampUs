@@ -48,6 +48,8 @@
                             </div>
                             <small *ngIf="password.touched && !password.valid" class="text-danger">*Password is required</small>
                             <button type="button" (click)="addUser()" class="btn btn-primary btn-block mt-4 w-100">Register</button>
+                            <small *ngIf="missingField" class="text-danger centered">Please fill out all fields</small>
+                            <small class="text-danger centered">{{errormessage}}</small>
                             <div class="text-center pt-4 text-muted">Already have an account? <a id="loginreroute" routerLink="/login">Login</a></div>
                         </form>
                     </div>

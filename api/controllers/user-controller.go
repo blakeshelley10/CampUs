@@ -71,7 +71,7 @@ func RegisterUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	// Decodes the JSON data from the request body into the user struct
 	decoder := json.NewDecoder(r.Body)
 	if err := decoder.Decode(&user); err != nil {
-		respondError(w, http.StatusBadRequest, "decoder error") //err.Error())
+		respondError(w, http.StatusBadRequest, err.Error())
 		return
 	}
 
@@ -80,7 +80,7 @@ func RegisterUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 	// Checks if password meets requirements for good entropy
 	if !Password(user.Passwordhash) {
-		respondError(w, http.StatusBadRequest, "Password does not meet the requirements. Please try again.")
+		respondError(w, 402, "Password does not meet the requirements. Please try again.")
 		return
 	}
 
@@ -101,7 +101,7 @@ func RegisterUser(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	db.Where("username = ?", username).First(&checkUsername)
 
 	if username == checkUsername.Username {
-		respondError(w, http.StatusInternalServerError, "Username already taken. Try another one.")
+		respondError(w, 401, "Username already taken. Try another one.")
 		return
 	}
 
