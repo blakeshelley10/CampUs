@@ -47,17 +47,12 @@
                                 </div>
                             </div>
                             <small *ngIf="password.touched && !password.valid" class="text-danger">*Password is required</small>
-                            
-                            <!-- <button type= "submit" class="btn btn-primary btn-block mt-4 w-100">Login</button> -->
-                            <!-- <button type="button" routerLink="/login" click class="btn btn-primary btn-block mt-4 w-100">Register</button>     -->
-                            <button (click)="addUser()" class="btn btn-primary btn-block mt-4 w-100">Register</button>
-                            <div class="text-center pt-4 text-muted">Already have an account? <a id="forget" routerLink="/login">Login</a></div>
+                            <button type="button" (click)="addUser()" class="btn btn-primary btn-block mt-4 w-100">Register</button>
+                            <div class="text-center pt-4 text-muted">Already have an account? <a id="loginreroute" routerLink="/login">Login</a></div>
                         </form>
-                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-

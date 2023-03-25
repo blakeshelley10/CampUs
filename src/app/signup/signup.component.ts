@@ -41,7 +41,7 @@ export class SignupComponent implements OnInit{
   addUser(){
     if(this.Firstname != "" && this.Lastname != "" && this.Email != "" && this.Passwordhash != "" && this.Username != "")
     {
-      this.httpClient.post('/api/users/register', {
+      this.httpClient.post('/api/users', {
         "Firstname": this.Firstname,
         "Lastname": this.Lastname,
         "Email": this.Email,
@@ -51,6 +51,7 @@ export class SignupComponent implements OnInit{
         this._router.navigateByUrl('/confirm-reg')
     }
     else{
+      // username or email already in use
 
     }
   }
