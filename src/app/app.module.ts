@@ -9,6 +9,7 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmRegComponent } from './confirm-reg/confirm-reg.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ConfirmRegComponent } from './confirm-reg/confirm-reg.component';
     LoginComponent,
     SignupComponent,
     HomeComponent,
-    ConfirmRegComponent
+    ConfirmRegComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

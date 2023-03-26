@@ -74,8 +74,6 @@ export class SignupComponent implements OnInit{
   }
     
   private fetchUsers(){
-
-
     //this.httpClient.get('/api/users',{observe: 'body', responseType: 'json'})
     // .pipe(map((res)=> {
     //   const users = [];

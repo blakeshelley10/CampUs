@@ -5,13 +5,14 @@ import { Router, RouterLink } from '@angular/router';
 import { __core_private_testing_placeholder__ } from '@angular/core/testing';
 import { Observable, of, from, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
+import { GlobalComponent } from '../global-component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent{
+export class LoginComponent {
   errormessage:any;
   missingField: boolean = false;
 
@@ -42,7 +43,9 @@ export class LoginComponent{
         "Username": this.Username,
         "Passwordhash": this.Passwordhash})
         .pipe(map((res)=> {
-          console.log("user logged in successfully");
+          GlobalComponent.globalStatus = true;
+          GlobalComponent.globalUsername = res['username'];
+          console.log(GlobalComponent.globalUsername + " logged in successfully");
           this._router.navigateByUrl('/home')
         }),
         catchError(this.handleError)
