@@ -13,6 +13,10 @@ import { GlobalComponent } from '../global-component';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+<<<<<<< Updated upstream
+=======
+  unitTest = 1;
+>>>>>>> Stashed changes
   errormessage:any;
   missingField: boolean = false;
 
@@ -72,4 +76,8 @@ export class LoginComponent {
     }
     return throwError(() => new Error(errormessage));
   }
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes

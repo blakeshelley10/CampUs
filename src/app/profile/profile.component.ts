@@ -8,4 +8,9 @@ import { GlobalComponent } from '../global-component';
 })
 export class ProfileComponent {
   pfpurl = "GlobalComponent.globalPFP"
+<<<<<<< Updated upstream
 }
+=======
+  user = GlobalComponent.globalUsername;
+}
+>>>>>>> Stashed changes
