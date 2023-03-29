@@ -1,6 +1,9 @@
 ## Frontend Work Completed:
 - Revamped the previous naviation bar. Our first imeplementation of the navigation bar was rough and a dated design that was not very pleasing on the eyes. The new navigation bar is modern and was modeled after those seen on popular websites. It displays the current page the user is viewig. 
-- Added user authentication functionallity. 
+- Added feature preventing users from entering simplistic or already taken usernames and passwords, as well as preventing them from leaving fields blank. The function that implements these features essentially sends a post request to the backend and observes the returned http status code to see if the user credentials were accepted or not.
+- Added user authentication to login page. This functionality is sililar to the above feature. we send a post request and await the http status code to see if the username and password correspond to an account in the backends database. 
+- Added component and page for creating an event post on the website. 
+- Added component and page for looking at the logged-in users profile. We are currently having issues displaying the users info so the page is not complete.
 
 ## Backend Work Completed:
 - Added CRUD functionality for the Event objects which represent campus events displayed on the website. The frontend team is able to create, read, update, and delete events as a user accesses the website through the client. 
@@ -8,6 +11,12 @@
 
 
 ## Frontend Unit Tests Added:
+- Test to observe if the App component was created.
+- Test to observe if the title of the app is correct. 
+- Test to observe if the Login component was created.
+- Test to observe if the Home component was created.
+- Test to observe if the Home component has an indicated variable of specific value.
+- Test to observe if the Login component has an indicated variable of specific value.
 
 
 ## Backend Unit Tests Added :
