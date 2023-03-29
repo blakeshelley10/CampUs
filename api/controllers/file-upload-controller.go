@@ -118,7 +118,7 @@ func UploadUserPFP(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	// tempFile.Write(fileBytes)
 
 	// Make dir for user to store their pfp
-	path := "./user-profile-images/" + username + "/"
+	path := "./user-profile-images/" + username
 
 	if err := os.MkdirAll(path, os.ModePerm); err != nil {
 		log.Fatal(err)
