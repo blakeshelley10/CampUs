@@ -11,25 +11,22 @@
                             <div class="form-group pt-3">
                                 <div class="input-field">
                                     <span class="fa fa-user p-2"></span>
-                                    <input type="text" placeholder="Username">
+                                    <input [(ngModel)]="Username" type="text" placeholder="Username" [ngModelOptions]="{standalone: true}" ngModel name="username" required username #username="ngModel">
                                 </div>
                             </div>
+                            <small *ngIf="username.touched && !username.valid" class="text-danger">*Username is required</small>
                             <div class="form-group pt-3">
                                 <div class="input-field">
                                     <span class="fa fa-lock p-2"></span>
-                                    <input [type]="type" placeholder="Password">
+                                    <input [(ngModel)]="Passwordhash" [type]="type" placeholder="Password" [ngModelOptions]="{standalone: true}" ngModel name="password" required password #password="ngModel">
                                     <span (click)="hideShowPass()" class="fa {{eyeIcon}}"></span>
                                 </div>
                             </div>
-                            <div class="form-inline fr mt-4">
-                                <a id="forget" class="font-weight-bold">Forget Password?</a>
-                            </div>
-                            <!-- <button type= "submit" class="btn btn-primary btn-block mt-4 w-100">Login</button> -->
-                            <button type="button" routerLink="/home" class="btn btn-primary btn-block mt-4 w-100">Login</button>
+                            <small *ngIf="password.touched && !password.valid" class="text-danger">*Password is required</small>
+                            <button type="button" routerLink="/home" class="btn btn-primary btn-block mt-4 w-100">Login</button>    
                             <div class="text-center pt-4 text-muted">Don't have an account? <a id="forget" routerLink="/signup">Sign Up</a></div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
