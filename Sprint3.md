@@ -1,5 +1,6 @@
 ## Frontend Work Completed:
-
+- Revamped the previous naviation bar. Our first imeplementation of the navigation bar was rough and a dated design that was not very pleasing on the eyes. The new navigation bar is modern and was modeled after those seen on popular websites. It displays the current page the user is viewig. 
+- Added user authentication functionallity. 
 
 ## Backend Work Completed:
 - Added CRUD functionality for the Event objects which represent campus events displayed on the website. The frontend team is able to create, read, update, and delete events as a user accesses the website through the client. 
