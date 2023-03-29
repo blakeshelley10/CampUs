@@ -1,22 +1,15 @@
 ## Frontend Work Completed:
 - Revamped the previous naviation bar. Our first imeplementation of the navigation bar was rough and a dated design that was not very pleasing on the eyes. The new navigation bar is modern and was modeled after those seen on popular websites. It displays the current page the user is viewig. 
-- Added feature preventing users from entering simplistic or already taken usernames and passwords, as well as preventing them from leaving fields blank. The function that implements these features essentially sends a post request to the backend and observes the returned http status code to see if the user credentials were accepted or not.
-- Added user authentication to login page. This functionality is sililar to the above feature. we send a post request and await the http status code to see if the username and password correspond to an account in the backends database. 
-- Added component and page for creating an event post on the website. 
-- Added component and page for looking at the logged-in users profile. We are currently having issues displaying the users info so the page is not complete.
+- Added user authentication functionallity. 
 
 ## Backend Work Completed:
 - Added CRUD functionality for the Event objects which represent campus events displayed on the website. The frontend team is able to create, read, update, and delete events as a user accesses the website through the client. 
 - Added Event object unit tests, designed similarly to the User object unit tests. These tests expand the golang testing framework in our backend code, making use of the net/http packages. These tests help us to continuously test our backend controller functions as we add to them.
+- Added File Upload routes which will be used to upload any sort of files needed for the website. 
+- Added Password file used to manage user password authentication and hashing.
 
 
 ## Frontend Unit Tests Added:
-- Test to observe if the App component was created.
-- Test to observe if the title of the app is correct. 
-- Test to observe if the Login component was created.
-- Test to observe if the Home component was created.
-- Test to observe if the Home component has an indicated variable of specific value.
-- Test to observe if the Login component has an indicated variable of specific value.
 
 
 ## Backend Unit Tests Added :
@@ -24,6 +17,7 @@
 - Created 4 event unit tests to test the 4 normal CRUD operations for events (Create, Read, Update, Delete). These test functions directly test the controller functions using a test database and no routing. In order to simulate a http response writer and http request, they make use of golang's "httptest" package to create a response recorder and test request. Then, they call the controller function and use JSON decoding and control logic to check for discrepancies in the expected and returned data. They call the function t.Errorf (from the golang "testing" package) to report failed tests to the user.
 
 ### File Upload Tests
+- Created a mock HTML file ([image-test.html](https://github.com/blakeshelley10/CampUs/blob/096f22e09e990107064a34ca251095d3ae6f532d/api/app/image-test.html)) which is used to test whether the user profile picture is able to be uploaded to the server. The HTML page generates an upload button where it can take in a picture and send the backend that picture in the form of a multipart data. The backend will run the UploadUserPFP route and if the picture is uploaded to the server under the correct folders, then the route works.
 
 
 ## Backend API Documentation:
@@ -49,8 +43,13 @@
 - Integrated a SearchEvent function that can be used to find other events similar to a target event. The function takes in an event struct and uses that struct to build a gorm "where" clause based off of that event's characteristics. It then uses that where clause and the gorm "Find" function to search the database for events that are similar to the target event. It then returns a 200 statusOK and an array of similar events in a JSON package.
 
 ### File Upload Routes 
+- Integrated an UploadFile function which will be used to allow users to upload a file while signed into their account. The backend parses a multipart form data and saves it inside a folder called "uploaded-file" under the filename by using the os.Create and the io.Copy functions.
+- Integrated an UploadUserPFP function which will be used to specifically allow users to upload their profile pictures under their account. It is similar to the UploadFile function, however, it has a few more steps. Firstly, it will extract the user's username from the receiving url and use this to store their profile picture under a folder named after that. After parsing the multipart data form, the function will save it under the path "user-profile-images/username/handler.Filename", where the username is the user's actual username and the handler.Filename is the name of the profile picture that was uploaded by that user. In addition to using the os.Create and io.Copy functions to save the image, it will also use the os.MkdirAll function to actually create a subfolder titled the user's username. 
 
+### Password Helper Functions
+- Used the crypto/bcrypt GoLang library in order to hash passwords entered by the user. Two functions were created called HashPassword and CheckPasswordHash which hashes the user's password when registering for an account and checks if the user's password is correct when loging in, respectively. The first function uses the bcrypt.GenerateFromPassword to hash the password and the second function uses the bcrypt.CompareHashAndPassword to check if the inputted password is correct.
+- Created a function called "Password" which is used when registering a user in order to check for password entropy. It checks if the password has an upper case letter, lower case letter, number, symbol, and is greater than eight letters.
 
-## Video Link: [Sprint 3 - CampUs]()
+## Video Link: [Sprint 3 - CampUs](https://youtu.be/6hBn7-hnoo0)
 
 ## Github Link: [CampUs Github](https://github.com/blakeshelley10/CampUs)
