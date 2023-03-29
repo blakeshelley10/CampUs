@@ -1,12 +1,12 @@
-<div class="topnav">
-    <a class="home">Home</a>
-    <a href="/login">Login</a>
-    <a href="/signup">Signup</a>
-    <!--<a href="#about">About</a> -->
+<div class="outer">
+    <div class="topnav">
+        <a class="left home">Home</a>
+        <a class="left"*ngIf="!loggedIn" href="/login">Login</a>
+        <a class="left"*ngIf="!loggedIn" href="/signup">Signup</a>
+        <a class="left"*ngIf="loggedIn">My Posts</a>
+        <a type ="button" class="right" href="/profile"><img *ngIf="loggedIn" src="{{pfpurl}}" class="userPfp right"></a>
+    </div>
+        
+    
+    <button type="button" (click)="createPost()">New Post</button>
 </div>
-
-<img src="../../assets/cen3031logo.PNG" alt="cinque terre" center>
-
-<button>New Post</button>
-
-

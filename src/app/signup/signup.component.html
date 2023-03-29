@@ -1,4 +1,9 @@
 <div class="outer">
+    <div class="topnav">
+        <a href="/home">Home</a>
+        <a href="/login">Login</a>
+        <a class="signup">Signup</a>
+    </div>
     <div class="container">
         <div class="row">
             <div class="offset-med-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
@@ -47,17 +52,14 @@
                                 </div>
                             </div>
                             <small *ngIf="password.touched && !password.valid" class="text-danger">*Password is required</small>
-                            
-                            <!-- <button type= "submit" class="btn btn-primary btn-block mt-4 w-100">Login</button> -->
-                            <!-- <button type="button" routerLink="/login" click class="btn btn-primary btn-block mt-4 w-100">Register</button>     -->
-                            <button (click)="addUser()" class="btn btn-primary btn-block mt-4 w-100">Register</button>
-                            <div class="text-center pt-4 text-muted">Already have an account? <a id="forget" routerLink="/login">Login</a></div>
+                            <button type="button" (click)="addUser()" class="btn btn-primary btn-block mt-4 w-100">Register</button>
+                            <small *ngIf="missingField" class="text-danger centered">Please fill out all fields</small>
+                            <small class="text-danger centered">{{errormessage}}</small>
+                            <div class="text-center pt-4 text-muted">Already have an account? <a id="loginreroute" routerLink="/login">Login</a></div>
                         </form>
-                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-

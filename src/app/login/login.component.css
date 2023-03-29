@@ -73,3 +73,37 @@ img{
     object-fit: cover;
     border-radius: 50%;
 }
+
+.centered {
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.topnav {
+    background-color: #2943a2;
+    overflow: hidden;
+    border-bottom: 1px solid black;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+
+  /* Add a color to the active/current link */
+  .topnav a.login {
+    background-color: #ffffff;
+    color: black;
+  }
