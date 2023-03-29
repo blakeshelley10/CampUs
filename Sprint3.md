@@ -2,12 +2,12 @@
 
 
 ## Backend Work Completed:
+- Added CRUD functionality for the Event objects which represent campus events displayed on the website. The frontend team is able to create, read, update, and delete events as a user accesses the website through the client. 
+
+## Frontend Unit Tests Added:
 
 
-### Frontend Unit Test:
-
-
-## Backend Unit Test:
+## Backend Unit Tests Added :
 
 
 ## Backend API Documentation:
@@ -22,6 +22,12 @@
 ### User Authentication Routes
 - Integrated a RegisterUser function which receives a POST request. This function allows users to create an account on our website using their first name, last name, email, username, and password. The function is similar to the function CreateUser, except after hashing the password, the function checks whether this username already exists in the database through the "Where" function. If the username has already been taken by another user, the website will prompt the user to try registering again with a different username. After the user successfully registers their account, the backend will store this information in a User struct inside the website's database.   
 - Integrated a LogIn function which receives a POST request. This function allows users to login to their account that they previously signed up with. The function is similar to the function CreateUser, except after hashing the password, the function checks whether this username already exists in the database through the "Where" function. When the user logs in, if their username or password is incorrect, or if it does not even exist in the database, the website will tell the user that one of the fields (username or passoword) is incorrect and prompt the user to try logging in again.
+
+### Event CRUD Routes
+
+
+### File Upload Routes 
+
 
 ## Video Link: [Sprint 3 - CampUs]()
 
