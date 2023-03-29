@@ -3,11 +3,17 @@
 
 ## Backend Work Completed:
 - Added CRUD functionality for the Event objects which represent campus events displayed on the website. The frontend team is able to create, read, update, and delete events as a user accesses the website through the client. 
+- Added Event object unit tests, designed similarly to the User object unit tests. These tests expand the golang testing framework in our backend code, making use of the net/http packages. These tests help us to continuously test our backend controller functions as we add to them.
+
 
 ## Frontend Unit Tests Added:
 
 
 ## Backend Unit Tests Added :
+### Event CRUD Tests
+- Created 4 event unit tests to test the 4 normal CRUD operations for events (Create, Read, Update, Delete). These test functions directly test the controller functions using a test database and no routing. In order to simulate a http response writer and http request, they make use of golang's "httptest" package to create a response recorder and test request. Then, they call the controller function and use JSON decoding and control logic to check for discrepancies in the expected and returned data. They call the function t.Errorf (from the golang "testing" package) to report failed tests to the user.
+
+### File Upload Tests
 
 
 ## Backend API Documentation:
@@ -24,7 +30,13 @@
 - Integrated a LogIn function which receives a POST request. This function allows users to login to their account that they previously signed up with. The function is similar to the function CreateUser, except after hashing the password, the function checks whether this username already exists in the database through the "Where" function. When the user logs in, if their username or password is incorrect, or if it does not even exist in the database, the website will tell the user that one of the fields (username or passoword) is incorrect and prompt the user to try logging in again.
 
 ### Event CRUD Routes
-
+- Integrated a GetAllEvents function which receives a GET request. This function allows the backend team to receive all the users who have created an account in our website. The function creates an empty User struct and then uses the "Find" GORM function to find all structs in the database containing the same format as User. It then responds with JSON data with a 200 status code.
+- Integrated a GetEvent function which receives a GET request. This function allows the backend team to receive a specific user who has created an account in our website. The function uses the "mux.Vars(r)" function to extract the variables from the incoming request's URL. The variables are returned as a map where the keys are the variable names defined in the URL path and the values are the actual values specified in the request. The function then finds the value containing the key similar to the event name passed in the URL and uses the "findEvent" function to find that user in the database. If successful, the function responds with a status code 200 and the user's data. If not, it returns nothing. 
+- Integrated a CreateEvent function which receives a POST request. This function allows the backend team to create new users and store them in the database. The function creates a new empty Event struct, decodes the information received as an http.Request, and stores this information in the new empty User struct.
+- Integrated an UpdateEvent function which receives a POST request. This function allows the backend to update an event already stored in the database. The function uses the "mux.Vars(r)" function to extract the variables from the incoming request's URL. The variables are returned as a map where the keys are the variable names defined in the URL path and the values are the actual values specified in the request. The function then finds the value containing the key similar to the name passed in the URL and uses the "findEvent" function to find that user in the database. Once found, the function will then decode the information sent through the http.Request and replace the data in the old struct with the data that it decoded. It then saves that updated struct and returns a 201 status code.
+- Integrated a DeleteEvent function which receives a POST request. This function allows the backend to delete a user already stored in the database. This function allows the backend to update a user already stored in the database. The function uses the "mux.Vars(r)" function to extract the variables from the incoming request's URL. The variables are returned as a map where the keys are the variable names defined in the URL path and the values are the actual values specified in the request. The function then finds the value containing the key similar to the username passed in the URL and uses the "findUser" function to find that user in the database. Once found, it uses the "Delete" function to remove that struct from the database and returns a 200 status code.
+- Integrated a findEvent function used by the backend team to find an event in the other functions listed above and below this document. The function creates an empty Event Struct and uses the "Find" function to locate an event in the database by its name. It then stores that event's information in the newly created Event struct and returns a reference to that struct which other functions will utilize.
+- Integrated a SearchEvent function that can be used to find other events similar to a target event. The function takes in an event struct and uses that struct to build a gorm "where" clause based off of that event's characteristics. It then uses that where clause and the gorm "Find" function to search the database for events that are similar to the target event. It then returns a 200 statusOK and an array of similar events in a JSON package.
 
 ### File Upload Routes 
 
