@@ -1,27 +1,14 @@
 ## Frontend Work Completed:
-- Defined proxy.config.json to reroute all requests made from the frontend to url "/api/*" to the backend
-- Signup page now create new user information and sends a POST request to the backend to store new users in the database
-- Signup page requires input for all fields or it will not send to the backend
-- Signup page leads to new registration screen once registration is successful
+
 
 ## Backend Work Completed:
-- Set up a database to store User and Event structs.
-- Added CRUD functions for the backend team to analyze and test activity within the database.
-- Integrated a RegisterUser function which receives a POST request. This function allows users to create an account on our website using their first name, last name, email, username, and password. If the username has already been taken by another user, the website will prompt the user to try registering again with a different username. After the user successfully registers their account, the backend will store this information in a User struct inside the website's database. 
-- Integrated a LogIn function which receives a POST request. This function allows users to login to their account that they previously signed up with. When the user logs in, if their username or password is incorrect, or if it does not even exist in the database, the website will tell the user that one of the fields (username or passoword) is incorrect and prompt the user to try logging in again.
-- Added a backend testing framework using the "testing" and "httptest" golang packages. This framework can be used to test all of our controller functions for managing server data. The tests can be run easily and consecutively by using the "go test" command in a golang environment.
 
-## Frontend Cypress Test:
 
 ### Frontend Unit Test:
-- Created a unit test using cypress in order to test the signup page. The unit test goes to the 'signup' page where a user can register. The test fills in the required text fields with some rudimentary user data. The test then makes a click event occur on the registration button. This sends a push request to the backend to store the newly registed users data. After this, the page reroutes to the confirmed signup page. 
+
 
 ## Backend Unit Test:
-### User CRUD Tests
-- Created 4 unit tests to test the 4 normal CRUD operations (Create, Read, Update, Delete). These test functions directly test the controller functions using a test database and no routing. In order to simulate a http response writer and http request, they make use of golang's "httptest" package to create a response recorder and test request. Then, they call the controller function and use JSON decoding and control logic to check for discrepancies in the expected and returned data. They call the function t.Errorf (from the golang "testing" package) to report failed tests to the user.
 
-### User Authentication Tests
-- Similar to the CRUD tests above, these tests make use of golang testing frameworks to test specific controller functions. However, these tests are focused on the LogIn and RegisterUser functions that are designed for use by the frontend. These tests are important in checking potential front end requests for correct http response codes and bodies. 
 
 ## Backend API Documentation:
 ### User CRUD Routes
@@ -36,6 +23,6 @@
 - Integrated a RegisterUser function which receives a POST request. This function allows users to create an account on our website using their first name, last name, email, username, and password. The function is similar to the function CreateUser, except after hashing the password, the function checks whether this username already exists in the database through the "Where" function. If the username has already been taken by another user, the website will prompt the user to try registering again with a different username. After the user successfully registers their account, the backend will store this information in a User struct inside the website's database.   
 - Integrated a LogIn function which receives a POST request. This function allows users to login to their account that they previously signed up with. The function is similar to the function CreateUser, except after hashing the password, the function checks whether this username already exists in the database through the "Where" function. When the user logs in, if their username or password is incorrect, or if it does not even exist in the database, the website will tell the user that one of the fields (username or passoword) is incorrect and prompt the user to try logging in again.
 
-## Video Link: [Sprint 2 - CampUs](https://youtu.be/17yggggkEFY)
+## Video Link: [Sprint 3 - CampUs]()
 
 ## Github Link: [CampUs Github](https://github.com/blakeshelley10/CampUs)
