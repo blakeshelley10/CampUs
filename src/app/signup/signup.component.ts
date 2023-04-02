@@ -19,6 +19,8 @@ export class SignupComponent implements OnInit{
   public Email = ''
   public Username = ''
   public Passwordhash = ''
+  public pfpPath= '../../assets/defaultpfp.jpg'
+  
 
   missingField: boolean = false;
 
@@ -52,7 +54,8 @@ export class SignupComponent implements OnInit{
         "Lastname": this.Lastname,
         "Email": this.Email,
         "Passwordhash": this.Passwordhash,
-        "Username": this.Username})
+        "Username": this.Username,
+        "profilepicturepath": this.pfpPath})
         .pipe(map((res)=> {
           console.log("user registered successfully");
           this._router.navigateByUrl('/confirm-reg')
@@ -70,9 +73,9 @@ export class SignupComponent implements OnInit{
 
   deleteUser()
   {
-    this.httpClient.delete('/api/users/testtest1').subscribe((res) => {console.log})
+    this.httpClient.delete('/api/users/test1').subscribe((res) => {console.log})
   }
-    
+  
   private fetchUsers(){
     //this.httpClient.get('/api/users',{observe: 'body', responseType: 'json'})
     // .pipe(map((res)=> {

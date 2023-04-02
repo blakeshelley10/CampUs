@@ -7,5 +7,5 @@ import { GlobalComponent } from '../global-component';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent {
-  pfpurl = "GlobalComponent.globalPFP"
+  pfpurl = "../../assets/defaultpfp.jpg"
 }

@@ -4,5 +4,5 @@
 
 export class GlobalComponent {
     public static globalStatus = true;
-    public static globalUsername = "testtest2"
+    public static globalUsername = "test1"
 }
