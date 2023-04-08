@@ -4,32 +4,6 @@
     background-size: cover;
   }
 
-<<<<<<< HEAD
-.topnav {
-    background-color: #2943a2;
-    overflow: hidden;
-    border-bottom: 1px solid black;
-    max-height: 55px;
-  }
-  
-/* Style the links inside the navigation bar */
-.topnav a {
-    float: left;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-  
-/* Change the color of links on hover */
-.topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-=======
->>>>>>> 3a6184e7 (create post and login/logout)
 .userPfp {
     float: right;
     border-radius: 50%;
@@ -47,9 +21,6 @@
     box-shadow: 20px 20px 80px rgb(218, 218, 218);
     border-radius: 12px;
     margin-top: 100px;
-<<<<<<< HEAD
-}
-=======
     width: 350px;
 }
 
@@ -98,4 +69,3 @@
 .container{
     justify-content: center;
 }
->>>>>>> 3a6184e7 (create post and login/logout)

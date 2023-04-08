@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-<<<<<<< HEAD
-=======
 import { HostListener } from '@angular/core';
->>>>>>> 3a6184e7 (create post and login/logout)
 
 @Component({
   selector: 'app-root',
@@ -14,8 +11,6 @@ export class AppComponent {
   title = 'CampUs';
 
   constructor(private _router: Router) { }
-<<<<<<< HEAD
-=======
 
   @HostListener("window:load", ["$event"])
   clearOnLoad() {
@@ -35,7 +30,6 @@ export class AppComponent {
   //  
   //}
   //window.addEventListener('load', clearStorage);
->>>>>>> 3a6184e7 (create post and login/logout)
 }
 
 
