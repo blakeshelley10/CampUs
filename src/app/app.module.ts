@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmRegComponent } from './confirm-reg/confirm-reg.component';
 import { ProfileComponent } from './profile/profile.component';
+import { NewpostComponent } from './newpost/newpost.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { ProfileComponent } from './profile/profile.component';
     SignupComponent,
     HomeComponent,
     ConfirmRegComponent,
-    ProfileComponent
+    ProfileComponent,
+    NewpostComponent
   ],
   imports: [
     BrowserModule,

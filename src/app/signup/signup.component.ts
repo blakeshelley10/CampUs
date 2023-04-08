@@ -19,8 +19,6 @@ export class SignupComponent implements OnInit{
   public Email = ''
   public Username = ''
   public Passwordhash = ''
-  public pfpPath= '../../assets/defaultpfp.jpg'
-  
 
   missingField: boolean = false;
 
@@ -38,10 +36,7 @@ export class SignupComponent implements OnInit{
   ) {}
 
   ngOnInit(){
-    this.fetchUsers;
-  }
-  onUsersFetch(){
-    this.fetchUsers;
+    
   }
 
   // adds a user with the given registered info
@@ -54,8 +49,7 @@ export class SignupComponent implements OnInit{
         "Lastname": this.Lastname,
         "Email": this.Email,
         "Passwordhash": this.Passwordhash,
-        "Username": this.Username,
-        "profilepicturepath": this.pfpPath})
+        "Username": this.Username})
         .pipe(map((res)=> {
           console.log("user registered successfully");
           this._router.navigateByUrl('/confirm-reg')
@@ -74,21 +68,6 @@ export class SignupComponent implements OnInit{
   deleteUser()
   {
     this.httpClient.delete('/api/users/test1').subscribe((res) => {console.log})
-  }
-  
-  private fetchUsers(){
-    //this.httpClient.get('/api/users',{observe: 'body', responseType: 'json'})
-    // .pipe(map((res)=> {
-    //   const users = [];
-    //   for(const key in res)
-    //   {
-    //     if(res.hasOwnProperty(key)){
-    //       users.push({...res[key], id: key})
-    //     }
-    //   }
-    //   return users;
-    // }))
-    //.subscribe((res) => {console.log})
   }
 
   // handle 400 error

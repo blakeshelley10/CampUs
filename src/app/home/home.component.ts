@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginComponent } from '../login/login.component';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { firstValueFrom, lastValueFrom, map } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
-import { GlobalComponent } from '../global-component';
-
-// <img src="../../assets/cen3031logo.PNG" alt="cinque terre" center>
 
 @Component({
   selector: 'app-home',
@@ -16,6 +12,7 @@ export class HomeComponent implements OnInit{
   loggedIn: boolean = false;
   userName = "";
   pfpurl: string = "";
+  unitTest = 1;
 
   constructor(
     private httpClient: HttpClient,
@@ -23,25 +20,22 @@ export class HomeComponent implements OnInit{
   ) {}
   
   ngOnInit() {
-    this.loggedIn = GlobalComponent.globalStatus;
-    this.userName = GlobalComponent.globalUsername;
-    if (this.loggedIn) {
+    if (localStorage.getItem("currentUsername") != null) {
+      this.userName = localStorage.getItem("currentUsername");
+      this.loggedIn = true;
       console.log(this.userName + " logged in")
       this.httpClient.get('/api/users/' + this.userName)
       .subscribe((res) => {
-        this.pfpurl = res['profilepicturepath']
+        if (res['profilepicturepath'] != "") {
+          this.pfpurl = res['profilepicturepath']
+        } else {
+          this.pfpurl = "../../assets/defaultpfp.jpg"
+        }
       })
     }
   }
 
-  createPost() {
-    if (!this.loggedIn) {
-      this._router.navigateByUrl('/login')
-      return
-    }
-    
-    this.httpClient.get('/api/users/' + this.userName)
-    .subscribe((res) => {console.log(res['email'])})
+  logout() {
+    localStorage.removeItem('currentUsername');
   }
-
 }
