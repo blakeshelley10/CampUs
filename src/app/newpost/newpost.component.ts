@@ -11,6 +11,7 @@ import { catchError } from "rxjs/operators";
   styleUrls: ['./newpost.component.css']
 })
 export class NewpostComponent implements OnInit {
+  loggedIn: boolean = false;
   selectedImageFile: File;
   errormessage:any;
   missingField: boolean = false;
@@ -29,6 +30,8 @@ export class NewpostComponent implements OnInit {
    ngOnInit() {
     if (localStorage.getItem("currentUsername") == null) {
       this._router.navigateByUrl('/home')
+    } else {
+      this.loggedIn = true;
     }
    }
    onPhotoSelected(photoSelector: HTMLInputElement) {
@@ -85,5 +88,9 @@ export class NewpostComponent implements OnInit {
         errormessage = `Unexpected error. Please try again.`;
     }
     return throwError(() => new Error(errormessage));
+  }
+  
+  logout() {
+    localStorage.removeItem('currentUsername');
   }
 }

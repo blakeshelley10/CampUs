@@ -17,6 +17,9 @@
                 <a href="/profile"class="menu-item">
                     <i class="fa-solid fa-user"></i>
                 Profile</a>
+                <a href="/login"class="menu-item logout" *ngIf="loggedIn" (click)="logout()">
+                    <i class="fa-solid fa-sign-out"></i>
+                Logout</a>
             </nav>
         </aside>
         <!-- main part of page-->

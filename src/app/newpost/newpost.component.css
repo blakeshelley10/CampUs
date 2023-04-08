@@ -112,3 +112,9 @@
   border-radius: 1em;
   border: 1px dashed gray;
 }
+
+.logout {
+  position: fixed;
+  bottom: 0px;
+  width: 175px;
+}
