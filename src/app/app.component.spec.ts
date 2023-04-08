@@ -1,6 +1,10 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+<<<<<<< HEAD
+=======
+import { HttpClientModule } from '@angular/common/http';
+>>>>>>> 3a6184e7 (create post and login/logout)
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -25,6 +29,7 @@ describe('AppComponent', () => {
     const app = fixture.componentInstance;
     expect(app.title).toEqual('CampUs');
   });
+<<<<<<< HEAD
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
@@ -32,4 +37,6 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.content span')?.textContent).toContain('CampUs app is running!');
   });
+=======
+>>>>>>> 3a6184e7 (create post and login/logout)
 });

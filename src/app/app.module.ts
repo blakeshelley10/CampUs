@@ -10,6 +10,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmRegComponent } from './confirm-reg/confirm-reg.component';
 import { ProfileComponent } from './profile/profile.component';
+<<<<<<< HEAD
+=======
+import { NewpostComponent } from './newpost/newpost.component';
+
+>>>>>>> 3a6184e7 (create post and login/logout)
 
 @NgModule({
   declarations: [
@@ -18,7 +23,12 @@ import { ProfileComponent } from './profile/profile.component';
     SignupComponent,
     HomeComponent,
     ConfirmRegComponent,
+<<<<<<< HEAD
     ProfileComponent
+=======
+    ProfileComponent,
+    NewpostComponent
+>>>>>>> 3a6184e7 (create post and login/logout)
   ],
   imports: [
     BrowserModule,

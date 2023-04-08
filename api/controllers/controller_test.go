@@ -219,3 +219,132 @@ func TestDeleteUser(t *testing.T) {
 		t.Errorf("Expected user %s, got %s", testUser.Username, resultUser.Username)
 	}
 }
+<<<<<<< HEAD
+=======
+
+func TestCreateEvent(t *testing.T) {
+
+	//Open test database
+	testdb, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	testDB := models.DBMigrate(testdb)
+
+	//Create test event
+	testEvent := models.Event{Name: "JobFair", Date: "April 4, 2023", Time: "3:00 PM", Location: "O'Connell Center", Interests: "Networking, Professional Development"}
+
+	//Create test request and recorder
+	var b bytes.Buffer
+	encoder := json.NewEncoder(&b)
+	if err2 := encoder.Encode(testEvent); err2 != nil {
+		t.Fatal(err2)
+	}
+	wr := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodPost, "/api/events", &b)
+
+	//Call function
+	CreateEvent(testDB, wr, req)
+
+	//Check response code and body
+	if wr.Code != http.StatusCreated {
+		t.Errorf("Expected HTTP status code 201, got %d", wr.Code)
+	}
+
+	resultEvent := models.Event{}
+	decoder := json.NewDecoder(wr.Body)
+	if err3 := decoder.Decode(&resultEvent); err != nil {
+		t.Fatal(err3)
+	}
+	if resultEvent != testEvent {
+		t.Errorf("Expected event %s, got %s", testEvent.Name, resultEvent.Name)
+	}
+}
+
+func TestGetEvent(t *testing.T) {
+
+	//Open test database
+	testdb, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	testDB := models.DBMigrate(testdb)
+
+	//Create test event
+	testEvent := models.Event{Name: "JobFair", Date: "April 4, 2023", Time: "3:00 PM", Location: "O'Connell Center", Interests: "Networking, Professional Development"}
+
+	//Create test request and recorder
+	wr := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodGet, "/api/events/JobFair", nil)
+
+	//Call function
+	resultEvent := findEvent(testDB, testEvent.Name, wr, req)
+
+	//Check response code and body
+	if wr.Code == http.StatusNotFound {
+		t.Errorf("Event not found")
+	}
+
+	if *resultEvent != testEvent {
+		t.Errorf("Expected event %s, got %s", testEvent.Name, resultEvent.Name)
+	}
+}
+
+func TestUpdateEvent(t *testing.T) {
+
+	//Open test database
+	testdb, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	testDB := models.DBMigrate(testdb)
+
+	//Create test event
+	testEvent := models.Event{Name: "JobFair", Date: "April 4, 2023", Time: "3:00 PM", Location: "O'Connell Center", Interests: "Networking, Professional Development"}
+
+	//Create test request and recorder
+	wr := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodGet, "/api/events/JobFair", nil)
+
+	//Call function
+	resultEvent := findEvent(testDB, testEvent.Name, wr, req)
+
+	//Check response code and body
+	if wr.Code == http.StatusNotFound {
+		t.Errorf("Event not found")
+	}
+
+	if *resultEvent != testEvent {
+		t.Errorf("Expected event %s, got %s", testEvent.Name, resultEvent.Name)
+	}
+}
+
+func TestDeleteEvent(t *testing.T) {
+
+	//Open test database
+	testdb, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	if err != nil {
+		t.Fatal(err)
+	}
+	testDB := models.DBMigrate(testdb)
+
+	//Create test event
+	testEvent := models.Event{Name: "JobFair", Date: "April 4, 2023", Time: "3:00 PM", Location: "O'Connell Center", Interests: "Networking, Professional Development"}
+
+	//Create test request and recorder
+	wr := httptest.NewRecorder()
+	req := httptest.NewRequest(http.MethodGet, "/api/events/JobFair", nil)
+
+	//Call function
+	resultEvent := findEvent(testDB, testEvent.Name, wr, req)
+
+	//Check response code and body
+	if wr.Code == http.StatusNotFound {
+		t.Errorf("Event not found")
+	}
+
+	if *resultEvent != testEvent {
+		t.Errorf("Expected event %s, got %s", testEvent.Name, resultEvent.Name)
+	}
+}
+>>>>>>> 3a6184e7 (create post and login/logout)

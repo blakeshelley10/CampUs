@@ -1,12 +1,30 @@
 <div class="outer">
-    <div class="topnav">
-        <a class="left home">Home</a>
-        <a class="left"*ngIf="!loggedIn" href="/login">Login</a>
-        <a class="left"*ngIf="!loggedIn" href="/signup">Signup</a>
-        <a class="left"*ngIf="loggedIn">My Posts</a>
-        <a type ="button" class="right" href="/profile"><img *ngIf="loggedIn" src="{{pfpurl}}" class="userPfp right"></a>
-    </div>
-        
-    
-    <button type="button" (click)="createPost()">New Post</button>
+<div class= "app">
+
+    <aside class="sidebar">
+        <nav class="menu">
+            
+            <a href="/home"class="menu-item is-active">
+                <i class="fa-solid fa-house"></i>
+            Home</a>
+            <a href="/home"class="menu-item">
+                <i class="fa-solid fa-magnifying-glass"></i>    
+            Search</a>
+            <a href="/newpost"class="menu-item" *ngIf="loggedIn">
+                <i class="fa-solid fa-plus"></i>
+            Post</a>
+            <a href="/profile"class="menu-item" *ngIf="loggedIn">
+                <i class="fa-solid fa-user"></i>
+            Profile</a>
+            <a href="/login"class="menu-item" *ngIf="!loggedIn">
+                <i class="fa-solid fa-sign-in"></i>
+            Login</a>
+            <a href="/login"class="menu-item logout" *ngIf="loggedIn" (click)="logout()">
+                <i class="fa-solid fa-sign-out"></i>
+            Logout</a>
+        </nav>
+    </aside>
+    <!-- main part of page-->
+
+</div>
 </div>
