@@ -219,8 +219,6 @@ func TestDeleteUser(t *testing.T) {
 		t.Errorf("Expected user %s, got %s", testUser.Username, resultUser.Username)
 	}
 }
-<<<<<<< HEAD
-=======
 
 func TestCreateEvent(t *testing.T) {
 
@@ -347,4 +345,3 @@ func TestDeleteEvent(t *testing.T) {
 		t.Errorf("Expected event %s, got %s", testEvent.Name, resultEvent.Name)
 	}
 }
->>>>>>> 3a6184e7 (create post and login/logout)
