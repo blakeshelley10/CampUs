@@ -10,12 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmRegComponent } from './confirm-reg/confirm-reg.component';
 import { ProfileComponent } from './profile/profile.component';
-<<<<<<< Updated upstream
-=======
 import { NewpostComponent } from './newpost/newpost.component';
-
-
->>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
@@ -24,12 +19,8 @@ import { NewpostComponent } from './newpost/newpost.component';
     SignupComponent,
     HomeComponent,
     ConfirmRegComponent,
-<<<<<<< Updated upstream
-    ProfileComponent
-=======
     ProfileComponent,
     NewpostComponent
->>>>>>> Stashed changes
   ],
   imports: [
     BrowserModule,

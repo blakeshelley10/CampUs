@@ -4,59 +4,21 @@
   background-size: cover;
 }
 
-/* Add a black background color to the top navigation */
-.topnav {
-    background-color: #2943a2;
-    overflow: hidden;
-    border-bottom: 1px solid black;
-    max-height: 55px;
-  }
-  
-  /* Style the links inside the navigation bar */
-  .topnav .left {
-    float: left;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-  }
-  
-  /* Change the color of links on hover */
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  /* Add a color to the active/current link */
-  .topnav a.home {
-<<<<<<< Updated upstream
-    background-color: #ffffff;
-    color: black;
-=======
-    background-color: gray;
-    color: white;
->>>>>>> Stashed changes
-  }
-
-  .right {
-    justify-items: center;
-    justify-content: center;
-    padding: 0px;
-    display: flex;
-    float: right;
-    border-radius: 50%;
-    max-width: 54px;
-    max-height: 54px;
-<<<<<<< Updated upstream
-  }
-=======
-  }
-  /* new sidebar nav */
+.right {
+  justify-items: center;
+  justify-content: center;
+  padding: 0px;
+  display: flex;
+  float: right;
+  border-radius: 50%;
+  max-width: 54px;
+  max-height: 54px;
+}
+/* new sidebar nav */
 .app{
-    display: flex;
-    min-height: 100vh;
-  }
+  display: flex;
+  min-height: 100vh;
+}
 .sidebar{
   flex: 1 1 0;
   max-width: 175px;
@@ -74,7 +36,8 @@
 
 .sidebar .menu{
   margin: 0 -1rem;
-
+  overflow: hidden;
+  position: relative;
 }
 
 .sidebar .menu .menu-item {
@@ -93,4 +56,9 @@
   
   border-right: 5px solid orange;
 }
->>>>>>> Stashed changes
+
+.logout {
+  position: fixed;
+  bottom: 0px;
+  width: 175px;
+}
