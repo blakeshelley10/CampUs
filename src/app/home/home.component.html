@@ -1,30 +1,30 @@
 <div class="outer">
-<div class= "app">
+    <div class= "app">
 
-    <aside class="sidebar">
-        <nav class="menu">
-            
-            <a href="/home"class="menu-item is-active">
-                <i class="fa-solid fa-house"></i>
-            Home</a>
-            <a href="/home"class="menu-item">
-                <i class="fa-solid fa-magnifying-glass"></i>    
-            Search</a>
-            <a href="/newpost"class="menu-item" *ngIf="loggedIn">
-                <i class="fa-solid fa-plus"></i>
-            Post</a>
-            <a href="/profile"class="menu-item" *ngIf="loggedIn">
-                <i class="fa-solid fa-user"></i>
-            Profile</a>
-            <a href="/login"class="menu-item" *ngIf="!loggedIn">
-                <i class="fa-solid fa-sign-in"></i>
-            Login</a>
-            <a href="/login"class="menu-item logout" *ngIf="loggedIn" (click)="logout()">
-                <i class="fa-solid fa-sign-out"></i>
-            Logout</a>
-        </nav>
-    </aside>
-    <!-- main part of page-->
+        <aside class="sidebar">
+            <nav class="menu">
+                
+                <a href="/home"class="menu-item is-active">
+                    <i class="fa-solid fa-house"></i>
+                Home</a>
+                <a href="/home"class="menu-item">
+                    <i class="fa-solid fa-magnifying-glass"></i>    
+                Search</a>
+                <a href="/newpost"class="menu-item" *ngIf="loggedIn">
+                    <i class="fa-solid fa-plus"></i>
+                Post</a>
+                <a href="/profile"class="menu-item" *ngIf="loggedIn">
+                    <i class="fa-solid fa-user"></i>
+                Profile</a>
+                <a href="/login"class="menu-item" *ngIf="!loggedIn">
+                    <i class="fa-solid fa-sign-in"></i>
+                Login</a>
+                <a href="/login"class="menu-item logout" *ngIf="loggedIn" (click)="logout()">
+                    <i class="fa-solid fa-sign-out"></i>
+                Logout</a>
+            </nav>
+        </aside>
+        <!-- main part of page-->
 
-</div>
+    </div>
 </div>

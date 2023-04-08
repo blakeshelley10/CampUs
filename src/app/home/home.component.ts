@@ -38,4 +38,5 @@ export class HomeComponent implements OnInit{
   logout() {
     localStorage.removeItem('currentUsername');
   }
+
 }

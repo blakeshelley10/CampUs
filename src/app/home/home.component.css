@@ -57,18 +57,6 @@
   border-right: 5px solid orange;
 }
 
-#post-button {
-  position: fixed;
-  bottom: 2em;
-  right: 2em;
-  border-radius: 50%;
-  min-height: 40pt;
-  min-width: 40pt;
-  color: white;
-  background-color: #e7600c;
-  border: none;
-}
-
 .logout {
   position: fixed;
   bottom: 0px;

@@ -39,11 +39,15 @@ testem.log
 
 # System files
 <<<<<<< HEAD
+<<<<<<< HEAD
 campususers.db
 campusevents.db
 =======
 campusDB.db
 >>>>>>> 3a6184e7 (create post and login/logout)
+=======
+campusDB.db
+>>>>>>> main
 api/controllers/test.db
 CampUs
 .DS_Store
