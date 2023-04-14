@@ -1,5 +1,5 @@
 <div class="outer">
-    <div class= "app">
+    <div class="app">
 
         <aside class="sidebar">
             <nav class="menu">
@@ -14,6 +14,9 @@
                     <i class="fa-solid fa-plus"></i>
                 Post</a>
                 <a href="/profile"class="menu-item" *ngIf="loggedIn">
+                    <i class="fa-solid fa-bookmark"></i>
+                Saved</a>
+                <a href="/home"class="menu-item" *ngIf="loggedIn">
                     <i class="fa-solid fa-user"></i>
                 Profile</a>
                 <a href="/login"class="menu-item" *ngIf="!loggedIn">
@@ -24,7 +27,8 @@
                 Logout</a>
             </nav>
         </aside>
-        <!-- main part of page-->
-
+        <main class="feed">
+            <app-post *ngFor="let post of posts" [postData]="post"></app-post>
+        </main>
     </div>
 </div>
