@@ -3,12 +3,111 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 	"strings"
 
 	"github.com/blakeshelley10/CampUs/api/models"
 	"github.com/gorilla/mux"
 	"gorm.io/gorm"
 )
+
+// Creates event and saves it under user's account
+func CreateUserEvent(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	username := vars["username"]
+	user := findUser(db, username, w, r)
+	if user == nil {
+		return
+	}
+
+	event := models.Event{}
+
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(&event); err != nil {
+		respondError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	defer r.Body.Close()
+
+	checkEvent := models.Event{}
+	db.Where("name = ? AND date = ? AND time = ? AND location = ? AND interests = ?", event.Name, event.Date, event.Time, event.Location, event.Interests).Find(&checkEvent)
+
+	// Does the Find function find all structs with the same
+	// structure or can it also find same info specifically?
+
+	// FIX THIS
+	if event.Name == checkEvent.Name {
+		respondError(w, http.StatusInternalServerError, "Event has already been created.")
+		return
+	}
+
+	if err := db.Save(&event).Error; err != nil {
+		respondError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	// Adds created event to the user who created it
+	user.CreatedEvents[event.ID] = struct{}{}
+	respondJSON(w, http.StatusCreated, "Creating Events Works")
+}
+
+// Gets all events created by specific user
+func GetAllUserEvents(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+	// mux.Vars(r) is used to extract the variables from the incoming
+	// request's URL. The variables are returned as a map where the keys
+	// are the variable names defined in the URL path and the values are
+	// the actual values specified in the request.
+	vars := mux.Vars(r)
+	username := vars["username"]
+	user := findUser(db, username, w, r)
+	if user == nil {
+		return
+	}
+
+	respondJSON(w, http.StatusOK, user.CreatedEvents)
+}
+
+// Allows users to save events to view later
+func SaveEvents(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+
+	username := vars["username"]
+	user := findUser(db, username, w, r)
+	if user == nil {
+		return
+	}
+
+	eventid := vars["eventid"]
+
+	id := StringToUint(eventid)
+
+	event := findEventID(db, id, w, r)
+	if event == nil {
+		return
+	}
+
+	user.SavedEvents[event.ID] = struct{}{}
+
+	respondJSON(w, http.StatusOK, "Saving Events Works")
+
+}
+
+// Returns all events saved by the user
+func GetAllUserSavedEvents(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+	// mux.Vars(r) is used to extract the variables from the incoming
+	// request's URL. The variables are returned as a map where the keys
+	// are the variable names defined in the URL path and the values are
+	// the actual values specified in the request.
+	vars := mux.Vars(r)
+	username := vars["username"]
+	user := findUser(db, username, w, r)
+	if user == nil {
+		return
+	}
+
+	respondJSON(w, http.StatusOK, user.SavedEvents)
+}
 
 func CreateEvent(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	event := models.Event{}
@@ -143,6 +242,15 @@ func findEvent(db *gorm.DB, name string, w http.ResponseWriter, r *http.Request)
 	return &event
 }
 
+func findEventID(db *gorm.DB, id uint, w http.ResponseWriter, r *http.Request) *models.Event {
+	event := models.Event{}
+	if err := db.Find(&event, id).Error; err != nil {
+		respondError(w, http.StatusNotFound, err.Error())
+		return nil
+	}
+	return &event
+}
+
 // Helper function for SearchEvent function
 func buildWhereClause(e *models.Event) string {
 	var temp []string
@@ -162,4 +270,9 @@ func buildWhereClause(e *models.Event) string {
 		temp = append(temp, "interests LIKE '%"+e.Interests+"%'")
 	}
 	return strings.Join(temp, " AND ")
+}
+
+func StringToUint(s string) uint {
+	i, _ := strconv.Atoi(s)
+	return uint(i)
 }

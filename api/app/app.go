@@ -56,10 +56,15 @@ func (a *App) setRouters() {
 	a.Put("/api/events/{name}", a.UpdateEvent)
 	a.Delete("/api/events/{name}", a.DeleteEvent)
 	a.Post("/api/events/search", a.SearchEvent)
+	a.Post("/api/events/{username}", a.CreateUserEvent)
+	a.Get("/api/events/{username}", a.GetAllUserEvents)
+	a.Get("/api/events/saved/{username}", a.GetAllUserSavedEvents)
+	a.Post("/api/events/saved/{username}/{eventid}", a.SaveEvents)
 
 	//File upload routes
 	a.Post("/upload", a.UploadFile)
 	a.Post("/api/upload/profilepicture/{username}", a.UploadUserPFP)
+	a.Post("/api/upload/eventpicture/{eventid}", a.UpdateUserEventPicture)
 }
 
 // Router wrapper functions
@@ -137,6 +142,22 @@ func (a *App) SearchEvent(w http.ResponseWriter, r *http.Request) {
 	controllers.SearchEvent(a.DB, w, r)
 }
 
+func (a *App) CreateUserEvent(w http.ResponseWriter, r *http.Request) {
+	controllers.CreateUserEvent(a.DB, w, r)
+}
+
+func (a *App) GetAllUserEvents(w http.ResponseWriter, r *http.Request) {
+	controllers.GetAllUserEvents(a.DB, w, r)
+}
+
+func (a *App) SaveEvents(w http.ResponseWriter, r *http.Request) {
+	controllers.SaveEvents(a.DB, w, r)
+}
+
+func (a *App) GetAllUserSavedEvents(w http.ResponseWriter, r *http.Request) {
+	controllers.GetAllUserSavedEvents(a.DB, w, r)
+}
+
 // Handlers to manage image/file data
 func (a *App) UploadFile(w http.ResponseWriter, r *http.Request) {
 	controllers.UploadFile(w, r)
@@ -144,6 +165,10 @@ func (a *App) UploadFile(w http.ResponseWriter, r *http.Request) {
 
 func (a *App) UploadUserPFP(w http.ResponseWriter, r *http.Request) {
 	controllers.UploadUserPFP(a.DB, w, r)
+}
+
+func (a *App) UpdateUserEventPicture(w http.ResponseWriter, r *http.Request) {
+	controllers.UpdateUserEventPicture(a.DB, w, r)
 }
 
 // Run http server

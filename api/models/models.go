@@ -16,12 +16,14 @@ type User struct {
 	// CreatedAt, UpdatedAt, and DeletedAt are added to the User struct
 	// automatically.
 	gorm.Model
-	Username           string `json:"username"`
-	Passwordhash       string `json:"passwordhash"`
-	Firstname          string `json:"firstname"`
-	Lastname           string `json:"lastname"`
-	Email              string `json:"email"`
-	ProfilePicturePath string `json:"profilepicturepath"`
+	Username           string            `json:"username"`
+	Passwordhash       string            `json:"passwordhash"`
+	Firstname          string            `json:"firstname"`
+	Lastname           string            `json:"lastname"`
+	Email              string            `json:"email"`
+	ProfilePicturePath string            `json:"profilepicturepath"`
+	SavedEvents        map[uint]struct{} `json:"savedevents"`
+	CreatedEvents      map[uint]struct{} `json:"createdevents"`
 }
 
 // Struct that defines the fields that represent a user in the application
@@ -33,11 +35,12 @@ type Event struct {
 	// CreatedAt, UpdatedAt, and DeletedAt are added to the User struct
 	// automatically.
 	gorm.Model
-	Name      string `json:"name"`
-	Date      string `json:"date"`
-	Time      string `json:"time"`
-	Location  string `json:"location"`
-	Interests string `json:"interests"`
+	Name               string `json:"name"`
+	Date               string `json:"date"`
+	Time               string `json:"time"`
+	Location           string `json:"location"`
+	Interests          string `json:"interests"`
+	ProfilePicturePath string `json:"profilepicturepath"`
 }
 
 // The DBMigrate function takes a GORM database instance (db) and uses
