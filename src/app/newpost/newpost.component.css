@@ -14,7 +14,7 @@
   box-shadow: 10px 10px 50px black;
   border-radius: 12px;
   margin-top: 100px;
-  width: 350px;
+  width: 450px;
 }
 
 .input-field {
@@ -29,6 +29,7 @@
 .sidebar{
   flex: 1 1 0;
   max-width: 175px;
+  min-width: 175px;
   padding: 2rem 1rem;
   background-color: #2943a2;
 }
@@ -100,21 +101,38 @@
 
 #post-preview {
   text-align: right;
-  margin-top: 1em;
-  padding-right: 1em;
+  margin-top: 0.2em;
+  padding-bottom: 1em;
 }
 
 #post-preview-image {
   object-fit: cover;
   object-position: center;
-  width: 150px;
-  height: 100px;
+  width: 200px;
+  height: 150px;
   border-radius: 1em;
   border: 1px dashed gray;
+}
+.centered {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
 }
 
 .logout {
   position: fixed;
   bottom: 0px;
   width: 175px;
+}
+
+.hint {
+  padding-left: 0.5em;
+}
+
+.mat-datepicker-toggle {
+  vertical-align: -20%;
+}
+
+.content {
+  width: 100%;
 }
