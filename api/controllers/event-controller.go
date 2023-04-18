@@ -71,10 +71,7 @@ func CreateUserEvent(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 
 // Gets all events created by specific user
 func GetAllUserEvents(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
-	// mux.Vars(r) is used to extract the variables from the incoming
-	// request's URL. The variables are returned as a map where the keys
-	// are the variable names defined in the URL path and the values are
-	// the actual values specified in the request.
+
 	vars := mux.Vars(r)
 	username := vars["username"]
 	user := findUser(db, username, w, r)
