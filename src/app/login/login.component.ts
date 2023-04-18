@@ -5,7 +5,6 @@ import { Router, RouterLink } from '@angular/router';
 import { __core_private_testing_placeholder__ } from '@angular/core/testing';
 import { Observable, of, from, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { GlobalComponent } from '../global-component';
 
 @Component({
   selector: 'app-login',
@@ -13,10 +12,7 @@ import { GlobalComponent } from '../global-component';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-<<<<<<< Updated upstream
-=======
   unitTest = 1;
->>>>>>> Stashed changes
   errormessage:any;
   missingField: boolean = false;
 
@@ -38,7 +34,6 @@ export class LoginComponent {
     private _router: Router
   ) {}
 
-  // always returns 500 error
   userLogin(){
     // confirm if valid user
     if(this.Username != "" && this.Passwordhash != "") {
@@ -47,9 +42,8 @@ export class LoginComponent {
         "Username": this.Username,
         "Passwordhash": this.Passwordhash})
         .pipe(map((res)=> {
-          GlobalComponent.globalStatus = true;
-          GlobalComponent.globalUsername = res['username'];
-          console.log(GlobalComponent.globalUsername + " logged in successfully");
+          localStorage.setItem('currentUsername', res['username']);
+          console.log(res['username'] + " logged in successfully");
           this._router.navigateByUrl('/home')
         }),
         catchError(this.handleError)
@@ -76,8 +70,4 @@ export class LoginComponent {
     }
     return throwError(() => new Error(errormessage));
   }
-<<<<<<< Updated upstream
 }
-=======
-}
->>>>>>> Stashed changes

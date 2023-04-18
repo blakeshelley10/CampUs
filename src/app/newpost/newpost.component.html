@@ -13,13 +13,59 @@
                 <a href="/home"class="menu-item is-active">
                     <i class="fa-solid fa-plus"></i>
                 Post</a>
-                <!-- ideally this displays the actual user icon -->
-                <a href="/profile"class="menu-item ">
+                <a href="/profile"class="menu-item" *ngIf="loggedIn">
+                    <i class="fa-solid fa-bookmark"></i>
+                Saved</a>
+                <a href="/profile"class="menu-item">
                     <i class="fa-solid fa-user"></i>
                 Profile</a>
+                <a href="/login"class="menu-item logout" *ngIf="loggedIn" (click)="logout()">
+                    <i class="fa-solid fa-sign-out"></i>
+                Logout</a>
             </nav>
         </aside>
         <!-- main part of page-->
-        <main class="content">input fields will go here</main>
+        <main class="content">
+            <div class="container">
+                <div class="offset-med-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+                    <div class="panel border bg-white">
+                        <div class="panel-heading">
+                            <h3 class="pt-3 font-weight-bold">New Post</h3>
+                        </div>
+                        <div class="panel-body p-3">
+                            <div class="input-field">
+                                <input [(ngModel)]="EventName" type="text" class="form-control" placeholder="Event name...">
+                            </div>
+                            <div class="input-field">
+                                <input matInput [matDatepicker]="picker" [(ngModel)]="EventDate" class="form-control" placeholder="Event date...">
+                                <mat-hint class="hint">MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </div>
+                            <div class="input-field">
+                                <input [(ngModel)]="EventTime" type="time" format="hh:mm a" class="form-control">
+                            </div>
+                            <div class="input-field">
+                                <input [(ngModel)]="EventLocation" type="text" class="form-control" placeholder="Event location...">
+                            </div>
+                            <div class="input-field">
+                                <input [(ngModel)]="EventInterest" type="text" class="form-control" placeholder="Event interests...">
+                            </div>
+                            <small *ngIf="missingField" class="text-danger centered">Please fill out all fields. Images are optional.</small>
+                            <div *ngIf="selectedImageFile" id="post-preview">
+                                <img id="post-preview-image"/>
+                            </div>
+                            <div class="panel-bottom" align="right">
+                                <label class="image">
+                                    <i class="fa fa-image" aria-hidden="true"></i>
+                                    <input #photoSelector (change)="onPhotoSelected(photoSelector)" id="inputFile" type="file" accept="image/*" class="file-upload" >
+                                </label>
+                                <button type="button" id="post-button" class="fa-solid fa-plus" (click)="createPost()"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 </div>

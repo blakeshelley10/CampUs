@@ -10,12 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmRegComponent } from './confirm-reg/confirm-reg.component';
 import { ProfileComponent } from './profile/profile.component';
-<<<<<<< Updated upstream
-=======
 import { NewpostComponent } from './newpost/newpost.component';
-
-
->>>>>>> Stashed changes
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatNativeDateModule } from '@angular/material/core';
+import { PostComponent } from './tools/post/post.component';
 
 @NgModule({
   declarations: [
@@ -24,21 +25,27 @@ import { NewpostComponent } from './newpost/newpost.component';
     SignupComponent,
     HomeComponent,
     ConfirmRegComponent,
-<<<<<<< Updated upstream
-    ProfileComponent
-=======
     ProfileComponent,
-    NewpostComponent
->>>>>>> Stashed changes
+    NewpostComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatNativeDateModule
   ],
-  providers: [],
+  providers: [
+    MatDatepickerModule,
+    MatNativeDateModule
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

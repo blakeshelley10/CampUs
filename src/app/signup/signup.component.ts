@@ -36,10 +36,7 @@ export class SignupComponent implements OnInit{
   ) {}
 
   ngOnInit(){
-    this.fetchUsers;
-  }
-  onUsersFetch(){
-    this.fetchUsers;
+    
   }
 
   // adds a user with the given registered info
@@ -70,22 +67,7 @@ export class SignupComponent implements OnInit{
 
   deleteUser()
   {
-    this.httpClient.delete('/api/users/testtest1').subscribe((res) => {console.log})
-  }
-    
-  private fetchUsers(){
-    //this.httpClient.get('/api/users',{observe: 'body', responseType: 'json'})
-    // .pipe(map((res)=> {
-    //   const users = [];
-    //   for(const key in res)
-    //   {
-    //     if(res.hasOwnProperty(key)){
-    //       users.push({...res[key], id: key})
-    //     }
-    //   }
-    //   return users;
-    // }))
-    //.subscribe((res) => {console.log})
+    this.httpClient.delete('/api/users/test1').subscribe((res) => {console.log})
   }
 
   // handle 400 error
