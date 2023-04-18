@@ -4,6 +4,7 @@
 package models
 
 import (
+	"github.com/lib/pq"
 	"gorm.io/gorm"
 )
 
@@ -16,14 +17,14 @@ type User struct {
 	// CreatedAt, UpdatedAt, and DeletedAt are added to the User struct
 	// automatically.
 	gorm.Model
-	Username           string            `json:"username"`
-	Passwordhash       string            `json:"passwordhash"`
-	Firstname          string            `json:"firstname"`
-	Lastname           string            `json:"lastname"`
-	Email              string            `json:"email"`
-	ProfilePicturePath string            `json:"profilepicturepath"`
-	SavedEvents        map[uint]struct{} `json:"savedevents"`
-	CreatedEvents      map[uint]struct{} `json:"createdevents"`
+	Username           string         `json:"username"`
+	Passwordhash       string         `json:"passwordhash"`
+	Firstname          string         `json:"firstname"`
+	Lastname           string         `json:"lastname"`
+	Email              string         `json:"email"`
+	ProfilePicturePath string         `json:"profilepicturepath"`
+	SavedEvents        pq.StringArray `gorm:"type:text[]" json:"savedevents"`
+	CreatedEvents      pq.StringArray `gorm:"type:text[]" json:"createdevents"`
 }
 
 // Struct that defines the fields that represent a user in the application
@@ -35,6 +36,7 @@ type Event struct {
 	// CreatedAt, UpdatedAt, and DeletedAt are added to the User struct
 	// automatically.
 	gorm.Model
+	Identification     string `json:"identification"`
 	Name               string `json:"name"`
 	Date               string `json:"date"`
 	Time               string `json:"time"`

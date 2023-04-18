@@ -46,8 +46,9 @@ func (a *App) setRouters() {
 	a.Post("/api/users/register", a.RegisterUser)
 	a.Post("/api/users/login", a.LogIn)
 
-	//User Profile Picture
+	//Profile Pictures
 	a.Get("/api/users/profilepicture/{username}", a.GetUserProfilePicture)
+	a.Get("/api/events/profilepicture/{eventid}", a.GetUserEventPicture)
 
 	//Event routes
 	a.Post("/api/events", a.CreateEvent)
@@ -56,15 +57,15 @@ func (a *App) setRouters() {
 	a.Put("/api/events/{name}", a.UpdateEvent)
 	a.Delete("/api/events/{name}", a.DeleteEvent)
 	a.Post("/api/events/search", a.SearchEvent)
-	a.Post("/api/events/{username}", a.CreateUserEvent)
-	a.Get("/api/events/{username}", a.GetAllUserEvents)
+	a.Post("/api/events/create/{username}", a.CreateUserEvent)
+	a.Get("/api/events/create/{username}", a.GetAllUserEvents)
 	a.Get("/api/events/saved/{username}", a.GetAllUserSavedEvents)
 	a.Post("/api/events/saved/{username}/{eventid}", a.SaveEvents)
 
 	//File upload routes
 	a.Post("/upload", a.UploadFile)
 	a.Post("/api/upload/profilepicture/{username}", a.UploadUserPFP)
-	a.Post("/api/upload/eventpicture/{eventid}", a.UpdateUserEventPicture)
+	a.Post("/api/upload/eventpicture/{eventid}", a.UploadUserEventPicture)
 }
 
 // Router wrapper functions
@@ -158,6 +159,10 @@ func (a *App) GetAllUserSavedEvents(w http.ResponseWriter, r *http.Request) {
 	controllers.GetAllUserSavedEvents(a.DB, w, r)
 }
 
+func (a *App) GetUserEventPicture(w http.ResponseWriter, r *http.Request) {
+	controllers.GetUserEventPicture(a.DB, w, r)
+}
+
 // Handlers to manage image/file data
 func (a *App) UploadFile(w http.ResponseWriter, r *http.Request) {
 	controllers.UploadFile(w, r)
@@ -167,8 +172,8 @@ func (a *App) UploadUserPFP(w http.ResponseWriter, r *http.Request) {
 	controllers.UploadUserPFP(a.DB, w, r)
 }
 
-func (a *App) UpdateUserEventPicture(w http.ResponseWriter, r *http.Request) {
-	controllers.UpdateUserEventPicture(a.DB, w, r)
+func (a *App) UploadUserEventPicture(w http.ResponseWriter, r *http.Request) {
+	controllers.UploadUserEventPicture(a.DB, w, r)
 }
 
 // Run http server

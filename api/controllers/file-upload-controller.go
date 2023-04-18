@@ -155,7 +155,7 @@ func UploadUserPFP(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	respondJSON(w, http.StatusCreated, frontendPath)
 }
 
-func UpdateUserEventPicture(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
+func UploadUserEventPicture(db *gorm.DB, w http.ResponseWriter, r *http.Request) {
 	fmt.Println("File Upload Endpoint Hit")
 
 	// mux.Vars(r) is used to extract the variables from the incoming
@@ -166,8 +166,7 @@ func UpdateUserEventPicture(db *gorm.DB, w http.ResponseWriter, r *http.Request)
 
 	// vars["username"] is used to extract the value of this variable.
 	eventid := vars["eventid"]
-	id := StringToUint(eventid)
-	event := findEventID(db, id, w, r)
+	event := findEventID(db, eventid, w, r)
 	if event == nil {
 		return
 	}
@@ -207,7 +206,7 @@ func UpdateUserEventPicture(db *gorm.DB, w http.ResponseWriter, r *http.Request)
 	// tempFile.Write(fileBytes)
 
 	// Make dir for user to store their pfp
-	path := "./user-profile-images/" + eventid + "/"
+	path := "./event-profile-images/" + eventid + "/"
 
 	if err := os.MkdirAll(path, os.ModePerm); err != nil {
 		log.Fatal(err)
