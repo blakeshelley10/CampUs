@@ -1,13 +1,18 @@
 ## Frontend Work Completed:
 
 ## Backend Work Completed:
+-
+- Added new backend tests for user-created and user-saved events. These tests go along with the simpler CRUD operation tests to allow us to test our back end functionality as we develop new backend routes. 
+- Fixed a backend testing bug from sprint 2 which didn't properly test functions that used mux variables. We used the "SetURLVars" function present in the github.com/gorilla/mux api to directly inject mux variables into the test http request, fixing the bug.
 
 ## Frontend Unit Tests Added:
 
 ## Backend Unit Tests Added :
 ### Mux Varibles Injection Tests (Bug Fix)
+- Updated the get, update, and delete CRUD operations for both the user and event objects. Previously, since these routes utilize mux, we were not able to test them properly as the routes could not access the mux varibles present in a typical URL. However, because of the "SetURLVars" function from the github.com/gorilla/mux api, we are able to directly inject mux variables into the http request This allows us to simulate a typical URL and http request without having to use normal mux routing. 
 
 ### User Created and User Saved Tests
+- Since the CreateUserEvent route and SaveEvents route are more useful for the frontend than the basic CRUD routes, it's important to have testing routes to test them alongside the other routes. These new tests make use of test events already created through CRUD routes but further test the backend functionality by sending usernames and event names as mux variables and searching the database for both users and events.
 
 ## Backend API Documentation:
 ### User CRUD Routes
