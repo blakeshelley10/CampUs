@@ -1,4 +1,5 @@
 <div class="outer">
+<<<<<<< Updated upstream
     <div class="container">
         <div class="row">
             <div class="offset-med-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
@@ -12,15 +13,33 @@
                                 <div class="input-field">
                                     <span class="fa fa-user p-2"></span>
                                     <input [(ngModel)]="Username" type="text" placeholder="Username" [ngModelOptions]="{standalone: true}" ngModel name="username" required username #username="ngModel">
+=======
+    <main class="content">
+        <div class="container">
+            <div class="row">
+                <div class="offset-med-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+                    <div class="panel border bg-white">
+                        <div class="panel-heading">
+                            <h3 class="pt-3 font-weight-bold">Login to CampUs</h3>
+                        </div>
+                        <div class="panel-body p-3">
+                            <form>
+                                <div class="form-group pt-3">
+                                    <div class="input-field">
+                                        <span class="fa fa-user p-2"></span>
+                                        <input [(ngModel)]="Username" type="text" placeholder="Username" [ngModelOptions]="{standalone: true}" ngModel name="username" required username #username="ngModel">
+                                    </div>
+>>>>>>> Stashed changes
                                 </div>
-                            </div>
-                            <small *ngIf="username.touched && !username.valid" class="text-danger">*Username is required</small>
-                            <div class="form-group pt-3">
-                                <div class="input-field">
-                                    <span class="fa fa-lock p-2"></span>
-                                    <input [(ngModel)]="Passwordhash" [type]="type" placeholder="Password" [ngModelOptions]="{standalone: true}" ngModel name="password" required password #password="ngModel">
-                                    <span (click)="hideShowPass()" class="fa {{eyeIcon}}"></span>
+                                <small *ngIf="username.touched && !username.valid" class="text-danger">*Username is required</small>
+                                <div class="form-group pt-3">
+                                    <div class="input-field">
+                                        <span class="fa fa-lock p-2"></span>
+                                        <input [(ngModel)]="Passwordhash" [type]="type" placeholder="Password" [ngModelOptions]="{standalone: true}" ngModel name="password" required password #password="ngModel">
+                                        <span (click)="hideShowPass()" class="fa {{eyeIcon}}"></span>
+                                    </div>
                                 </div>
+<<<<<<< Updated upstream
                             </div>
                             <small *ngIf="password.touched && !password.valid" class="text-danger">*Password is required</small>
                             <div class="form-inline fr mt-4">
@@ -29,10 +48,19 @@
                             <button type="button" routerLink="/home" class="btn btn-primary btn-block mt-4 w-100">Login</button>    
                             <div class="text-center pt-4 text-muted">Don't have an account? <a id="forget" routerLink="/signup">Sign Up</a></div>
                         </form>
+=======
+                                <small *ngIf="password.touched && !password.valid" class="text-danger">*Password is required</small>
+                                <button type="button" (click)="userLogin()" class="btn btn-primary btn-block mt-4 w-100">Login</button>
+                                <small *ngIf="missingField" class="text-danger centered">Please fill out all fields</small>
+                                <small class="text-danger centered">{{errormessage}}</small>
+                                <div class="text-center pt-4 text-muted">Don't have an account? <a id="signupreroute" routerLink="/signup">Sign Up</a></div>
+                            </form>
+                        </div>
+>>>>>>> Stashed changes
                     </div>
 
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 </div>

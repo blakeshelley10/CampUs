@@ -10,3 +10,37 @@
 <button>New Post</button>
 
 
+<<<<<<< Updated upstream
+=======
+        <aside class="sidebar">
+            <nav class="menu">
+                
+                <a href="/home"class="menu-item is-active">
+                    <i class="fa-solid fa-house fa-xl"></i>
+                Home</a>
+                <a href="/search"class="menu-item">
+                    <i class="fa-solid fa-magnifying-glass fa-xl"></i>    
+                Search</a>
+                <a href="/newpost"class="menu-item" *ngIf="loggedIn">
+                    <i class="fa-solid fa-plus fa-xl"></i>
+                Post</a>
+                <a href="/profile"class="menu-item" *ngIf="loggedIn">
+                    <i class="fa-solid fa-bookmark fa-xl"></i>
+                Saved</a>
+                 <a href="/profile"class="menu-item" *ngIf="loggedIn">
+                    <img src="assets/defaultpfp.jpg" alt="profilepic" width="40px" height="20px">
+                Profile</a> 
+                <a href="/login"class="menu-item" *ngIf="!loggedIn">
+                    <i class="fa-solid fa-sign-in fa-xl"></i>
+                Login</a>
+                <a href="/login"class="menu-item logout" *ngIf="loggedIn" (click)="logout()">
+                    <i class="fa-solid fa-sign-out fa-xl"></i>
+                Logout</a>
+            </nav>
+        </aside>
+        <main class="feed">
+            <app-post *ngFor="let post of posts" [postData]="post"></app-post>
+        </main>
+    </div>
+</div>
+>>>>>>> Stashed changes

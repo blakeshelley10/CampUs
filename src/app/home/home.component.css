@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /* Add a black background color to the top navigation */
 .topnav {
     background-color: #2943a2;
@@ -34,3 +35,88 @@
     background-color: #ffffff;
     color: black;
   }
+=======
+.outer {
+  height: 100vh;
+  background-image: url(../../assets/cen3031logo.PNG);
+  background-size: cover;
+  position: fixed;
+  overflow-y:scroll;
+  overflow-x:hidden;
+  top: 0;
+  bottom:0;
+  width: 100%;
+}
+
+.right {
+  justify-items: center;
+  justify-content: center;
+  padding: 0px;
+  display: flex;
+  float: right;
+  border-radius: 50%;
+  max-width: 54px;
+  max-height: 54px;
+}
+/* new sidebar nav */
+.app{
+  display: flex;
+  min-height: 100vh;
+}
+.sidebar{
+  flex: 1 1 0;
+  max-width: 175px;
+  min-width: 175px;
+  padding: 2rem 1rem;
+  background-color: #2943a2;
+  position: fixed;
+  top: 0;
+  bottom:0;
+}
+
+
+.sidebar h3 {
+  color: gray;
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+}
+
+.sidebar .menu{
+  margin: 0 -1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.sidebar .menu .menu-item {
+  display: block;
+  padding: 1em;
+  color: white;
+  text-decoration: none;
+  transition: 0.2s linear;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.sidebar .menu .menu-item:hover,
+.sidebar .menu .menu-item.is-active {
+  color: orange;
+  
+  border-right: 5px solid orange;
+}
+
+.logout {
+  position: fixed;
+  bottom: 0px;
+  width: 175px;
+}
+
+.feed {
+  width: 100%;
+}
+
+img {
+  border-radius: 50%;
+  border: 1px solid gray
+}
+>>>>>>> Stashed changes

@@ -1,0 +1,91 @@
+<div class="outer">
+    <div class= "app">
+    
+        <aside class="sidebar">
+            <nav class="menu">
+                
+                <a href="/home"class="menu-item">
+                    <i class="fa-solid fa-house fa-xl"></i>
+                Home</a>
+                <a href="/home"class="menu-item">
+                    <i class="fa-solid fa-magnifying-glass fa-xl"></i>    
+                Search</a>
+                <a href="/newpost"class="menu-item">
+                    <i class="fa-solid fa-plus fa-2xl"></i>
+                Post</a>
+                <!-- ideally this displays the actual user icon -->
+                <a href="/profile"class="menu-item is-active">
+                    <img src="assets/defaultpfp.jpg" alt="profilepic" width="40px" height="20px">
+                Profile</a>
+            </nav>
+        </aside>
+        <!-- main part of page-->
+        <main class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="offset-med-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3" >
+                        <div class="panel border bg-white">
+                            
+                            <div class="panel-heading">
+                                <img src="assets/defaultpfp.jpg" alt="profilepic">
+                                <h3 class="pt-3 font-weight-bold">Users profile</h3>
+                                <div class="row">
+                                    <div class="panel-body">
+                                        <label for="pfp">Change Profile Picture</label>
+                                    </div>
+                                    <div class="panel-main">
+                                        <input type="file" class="file-input" [(ngModel)]="pfpFile" type="file" [ngModelOptions]="{standalone: true}" ngModel name="pfpFile">
+                                        
+                                    </div>
+                                    
+                                </div>
+                            
+                            </div>
+                            <div class="row"> 
+                                <div class="panel-body">
+                                    <label for="username"></label>
+                                </div>
+                                <div class="panel-main">
+                                    <input type="submit" (click)="pfpUpload()">  <p id="demo"></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="panel-body">
+                                    <label for="username">Username</label>
+                                </div>
+                                <div class="panel-main">
+                                    <label for="username">"temp username"</label>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="panel-body">
+                                    <label for="email">Email</label>
+                                </div>
+                                <div class="panel-main">
+                                    <label for="username">"temp email"</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="panel-body">
+                                    <label for="bio">Bio</label>
+                                </div>
+                                <div class="panel-main">
+                                    <label for="posts">"bio things"</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="panel-body">
+                                    <label for="posts">Posts</label>
+                                </div>
+                                <div class="panel-main">
+                                    <label for="posts">"posts table"</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>

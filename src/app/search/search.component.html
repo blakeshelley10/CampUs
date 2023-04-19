@@ -1,0 +1,41 @@
+
+<div class="outer">
+    <div class= "app">
+    
+        <aside class="sidebar">
+            <nav class="menu">
+                
+                <a href="/home"class="menu-item">
+                    <i class="fa-solid fa-house fa-xl"></i>
+                Home</a>
+                <a href="/home"class="menu-item is-active">
+                    <i class="fa-solid fa-magnifying-glass fa-xl"></i>    
+                Search</a>
+                <a href="/newpost"class="menu-item">
+                    <i class="fa-solid fa-plus fa-2xl"></i>
+                Post</a>
+                <!-- ideally this displays the actual user icon -->
+                <a href="/profile"class="menu-item ">
+                    <img src="assets/defaultpfp.jpg" alt="profilepic" width="40px" height="20px">
+                Profile</a>
+            </nav>
+        </aside>
+        <!-- main part of page-->
+
+
+        <!-- SEARCH BOX-->
+        <main class="content">
+            <div class="search">
+                <input type="text" class="searchTerm" placeholder="Search..." [(ngModel)]="Searchword" type="text" [ngModelOptions]="{standalone: true}" ngModel name="search">
+                <button type="submit" class="searchButton" (click)="SearchEvents()">
+                  <i class="fa fa-search"></i>
+               </button>
+             </div>
+        </main>
+
+        <!-- POST FEED-->
+        <!-- <main class="feed">
+            <app-post *ngFor="let post of posts" [postData]="post"></app-post> 
+        </main> -->
+    </div>
+</div>

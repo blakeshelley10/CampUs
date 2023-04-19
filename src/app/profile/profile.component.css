@@ -1,0 +1,125 @@
+.outer {
+    height: 100vh;
+    background-image: url(../../assets/cen3031logo.PNG);
+    background-size: cover;
+  }
+
+.userPfp {
+    float: right;
+    border-radius: 50%;
+    max-width: 54px;
+    max-height: 54px;
+  }
+  
+.panel-heading{
+    text-align: center;
+    margin-bottom: 5pt;
+    margin-top: 10pt;
+}
+
+.panel-body{
+  float: left;
+  width: 38%;
+  margin-top: 6px;
+  margin-left: 10px;
+  text-align: left;
+}
+
+.panel-body-2{
+  float: left;
+  width: 30%;
+  margin-top: 6px;
+  margin-left: 10px;
+  font-size: smaller;
+}
+.panel-main-2{
+  float: left;
+  text-align: center;
+  width: 60%;
+  margin-top: 6px;
+  font-size: small;
+}
+
+.panel-main{
+  float: center;
+  text-align: left;
+  width: 50%;
+  margin-top: 6px;
+}
+.row:after{
+  content: "";
+  display: table;
+  clear: both;
+}
+
+label {
+  padding: 5px 12px 5px 0;
+  display: inline-block;
+}
+
+.panel{
+    min-height: 320px;
+    border-radius: 12px;
+    margin-top: 100px;
+    width: 800px;
+}
+
+  /* new sidebar nav */
+  .app{
+    display: flex;
+    min-height: 100vh;
+  }
+.sidebar{
+  flex: 1 1 0;
+  max-width: 175px;
+  padding: 2rem 1rem;
+  background-color: #2943a2;
+}
+
+
+.sidebar h3 {
+  color: gray;
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+}
+
+.sidebar .menu{
+  margin: 0 -1rem;
+
+}
+
+.sidebar .menu .menu-item {
+  display: block;
+  padding: 1em;
+  color: white;
+  text-decoration: none;
+  transition: 0.2s linear;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.sidebar .menu .menu-item:hover,
+.sidebar .menu .menu-item.is-active {
+  color: orange;
+  
+  border-right: 5px solid orange;
+}
+
+.container{
+    justify-content: center;
+    display: flex;
+}
+
+image-cropper {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1000%;
+}
+
+img {
+  border-radius: 50%;
+  border: 1px solid gray
+}
