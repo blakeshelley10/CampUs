@@ -45,10 +45,13 @@ export class HomeComponent implements OnInit{
           post.location = container.location;
           post.interests = container.interests;
           post.id = container.ID;
-          //post.imageurl = container.imageurl;
-          //post.fav = container.fav;
+          if (container.profilepicturepath != "") {
+            post.imageurl = container.profilepicturepath;
+          } else {
+            post.imageurl = "../../assets/cen3031logo.PNG";
+          }
           this.posts.push(post);
-          console.log(this.posts[index].id);
+          //console.log(this.posts[index].id);
         })
       })
   }
@@ -67,5 +70,5 @@ export class PostData {
   interests: string;
   id: string;
   imageurl: string;
-  fav: string;
+  fav: boolean = false;
 }

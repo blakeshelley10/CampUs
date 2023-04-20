@@ -5,22 +5,6 @@ import { Router, RouterLink } from '@angular/router';
 import { Observable, of, from, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
 
-/*
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MomentDateAdapter } from '@angular/material-moment-adapter';
-
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'input',
-  },
-  display: {
-    dateInput: 'MM/DD/YYYY',
-    monthYearLabel: 'MMMM YYYY',
-    dateA11yLabel: 'MM/DD/YYYY',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
-*/
 @Component({
   selector: 'app-newpost',
   templateUrl: './newpost.component.html',
@@ -28,6 +12,7 @@ export const MY_FORMATS = {
 })
 export class NewpostComponent implements OnInit {
   loggedIn: boolean = false;
+  userName = "";
   selectedImageFile: File;
   errormessage:any;
   missingField: boolean = false;
@@ -48,10 +33,11 @@ export class NewpostComponent implements OnInit {
       this._router.navigateByUrl('/home')
     } else {
       this.loggedIn = true;
+      this.userName = localStorage.getItem("currentUsername");
     }
    }
-   onPhotoSelected(photoSelector: HTMLInputElement) {
-    this.selectedImageFile = photoSelector.files[0];
+   onPhotoSelected(event: any) {
+    this.selectedImageFile = event.target.files[0];
     if(!this.selectedImageFile) return;
     let fileReader = new FileReader();
     fileReader.readAsDataURL(this.selectedImageFile);
@@ -65,7 +51,7 @@ export class NewpostComponent implements OnInit {
     )
   }
 
-  parseEventDate(string) {
+  parseEventDate() {
     let date: string = this.EventDate.toString().substring(0,7)
     let day: string = this.EventDate.toString().substring(8,10)
     let suffix: string = this.EventDate.toString().substring(9,10)
@@ -91,13 +77,14 @@ export class NewpostComponent implements OnInit {
       }
     }
     this.EventDate = date + ' ' + day + suffix + ' ' + year;
-    console.log(this.EventDate);
+    //console.log(this.EventDate);
   }
 
   createPost() {
+    this.parseEventDate();
     if(this.EventName != "" && this.EventDate != "" && this.EventTime != "" && this.EventLocation != "" && this.EventInterest != "") {
       this.missingField = false;
-      this.httpClient.post('api/events', {
+      this.httpClient.post('api/events/create/' + this.userName, {
         "Name": this.EventName,
         "Date": this.EventDate,
         "Time": this.EventTime,
@@ -105,20 +92,47 @@ export class NewpostComponent implements OnInit {
         "Interests": this.EventInterest})
         .pipe(map((res)=> {
           console.log(res);
-          window.location.reload();
         }),
         catchError(this.handleError)
         )
-        .subscribe((res) => {console.log(res)},(error)=>{
+        .toPromise()
+        .then(() => {
+          if (this.selectedImageFile != null) {
+            console.log("image true");
+            this.httpClient.get('api/events/create/' + this.userName)
+            .subscribe((containers: any[]) => {
+              let id = containers[containers.length - 1].ID;
+              this.uploadImage(id);
+            })
+          }
+        },
+        (error)=>{
           this.errormessage = error;
         })
+      
     } else {
       this.missingField = true;
     }
   }
+  uploadImage(id: number) {
+    
+    const formData = new FormData();
+    //formData.set("name", "myFile")
+    //formData.set("file", this.selectedImageFile)
+    formData.append("myFile", this.selectedImageFile);
+    console.log("id: " + id);
+    let headers = new Headers();
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
+    
+    this.httpClient.post('api/upload/eventpicture/' + id, formData)
+    .subscribe((res) => {console.log(res)})
+    window.location.reload();
+  }
 
   deletePost() {
-    this.httpClient.delete('/api/events/No Image').subscribe((res) => {console.log})
+    console.log(this.selectedImageFile.name)
+    //this.httpClient.delete('/api/events/Test 2B').subscribe((res) => {console.log})
   }
 
   private handleError(error: HttpErrorResponse) {

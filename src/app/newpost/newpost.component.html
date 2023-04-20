@@ -58,7 +58,7 @@
                             <div class="panel-bottom" align="right">
                                 <label class="image">
                                     <i class="fa fa-image" aria-hidden="true"></i>
-                                    <input #photoSelector (change)="onPhotoSelected(photoSelector)" id="inputFile" type="file" accept="image/*" class="file-upload" >
+                                    <input #photoSelector (change)="onPhotoSelected($event)" id="inputFile" type="file" accept="image/*" class="file-upload" >
                                 </label>
                                 <button type="button" id="post-button" class="fa-solid fa-plus" (click)="createPost()"></button>
                             </div>
