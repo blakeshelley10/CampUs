@@ -1,5 +1,7 @@
 ## Frontend Work Completed:
-
+- Added profile page. Allows users to observe their own account details and change their personal account information such as profile pictures, bio, and observe previous posts. Users are additionally able to  upload a custom profile picture via file upload.
+- Added search page. Allows users to search the database of current posts with keywords. Displays all events that had relation to the users searched keyword.
+- Updated navigation bar on login and register pages. Added profile picture instead of a user icon next to the profile portion of the navigation bar.
 ## Backend Work Completed:
 - Added a CreateUserEvent route which allows users to create an event and store their event id under their account. 
 - Added a GetAllUserEvents route which allows the frontend to get all event structs created by a certain user.
@@ -11,7 +13,8 @@
 - Fixed a backend testing bug from sprint 2 which didn't properly test functions that used mux variables. We used the "SetURLVars" function present in the github.com/gorilla/mux api to directly inject mux variables into the test http request, fixing the bug.
 
 ## Frontend Unit Tests Added:
-
+- Test to observe if the Profile component is created and functions correctly on initialization.
+- Test to observe if the Search component is created and functions correctly on initialization.
 ## Backend Unit Tests Added :
 ### Mux Varibles Injection Tests (Bug Fix)
 - Updated the get, update, and delete CRUD operations for both the user and event objects. Previously, since these routes utilize mux, we were not able to test them properly as the routes could not access the mux varibles present in a typical URL. However, because of the "SetURLVars" function from the github.com/gorilla/mux api, we are able to directly inject mux variables into the http request This allows us to simulate a typical URL and http request without having to use normal mux routing. 
