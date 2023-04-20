@@ -2,6 +2,10 @@
 - Added profile page. Allows users to observe their own account details and change their personal account information such as profile pictures, bio, and observe previous posts. Users are additionally able to  upload a custom profile picture via file upload.
 - Added search page. Allows users to search the database of current posts with keywords. Displays all events that had relation to the users searched keyword.
 - Updated navigation bar on login and register pages. Added profile picture instead of a user icon next to the profile portion of the navigation bar.
+- Create post takes in user input to create an event post. It would allow users to insert a valid time and date as well as an image file and would.
+- Allowed users to upload an image from their device. This image would be sent to the backend in a seperate post request which would create an individual folder with the image, then add the image path to the associated event.
+- Created tools folder for creating individual post components. Then on initializing the home page, a function will iterate through each event in the data base and create a post component for each event to display in the front end. Events without an image would display a default image while events with an image displayed the specific image that was uploaded.
+- Save button allowed users to save a specific event for later viewing.
 ## Backend Work Completed:
 - Added a CreateUserEvent route which allows users to create an event and store their event id under their account. 
 - Added a GetAllUserEvents route which allows the frontend to get all event structs created by a certain user.
